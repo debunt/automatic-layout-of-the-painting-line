@@ -1,0 +1,30 @@
+root = Tk()
+b1 = Button(text="Изменить", width=15, height=3)
+b2 = Button(text="Вставить", width=15, height=3)
+
+l1 = Label(text="Машинное обучение", font="Arial 32")
+l2 = Label(text="Распознавание образов", font=("Comic Sans MS", 24, "bold"))
+l1.config(bd=20, bg='#ffaaaa') #размер полей у label
+l2.config(bd=20, bg='#aaffff')
+e1 = Entry(width=50) #текстовое поле
+
+def change():
+    b1['text'] = "Изменено"
+    b1['bg'] = '#000000'
+    b1['activebackground'] = '#555555'
+    b1['fg'] = '#ffffff'
+    b1['activeforeground'] = '#ffffff'
+    l1['text'] = "новый текст"
+
+def insert():
+    e1.insert(0, "Tkinter - GUI ") #Метод insert() принимает позицию, в которую надо вставлять текст, и сам текст.
+
+b1.config(command=change) #передаем метод, который вызовется по нажатию
+b2.config(command=insert) #передаем метод, который вызовется по нажатию
+
+b1.pack() # а-ля update
+b2.pack()
+l1.pack()
+l2.pack()
+e1.pack()
+root.mainloop()
