@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0662e225-8caa-4d73-b908-04814577d02f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/DrawMap.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Files/attachment_100.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/templateInputData.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Files/templateInputData.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autoCADparser.py" beforeDir="false" afterPath="$PROJECT_DIR$/autoCADparser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commomClasses.py" beforeDir="false" afterPath="$PROJECT_DIR$/commomClasses.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/constructor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows.py" beforeDir="false" afterPath="$PROJECT_DIR$/windows.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/GUI.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/createProject1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/startWindows.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Входные_Данные.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Входные_Данные.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ПримерПодосновы.dwg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,12 +58,12 @@
           <entry key="Python Console" value="34" />
           <entry key="py" value="26971" />
           <entry key="spec" value="1" />
-          <entry key="txt" value="130" />
+          <entry key="txt" value="277" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="131" />
+          <entry key="PLAIN_TEXT" value="278" />
           <entry key="Python" value="27005" />
         </counts>
       </usages-collector>
@@ -131,8 +119,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/windows.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="379" column="48" lean-forward="true" selection-start-line="379" selection-start-column="48" selection-end-line="379" selection-end-column="48" />
+            <state relative-caret-position="370">
+              <caret line="390" column="52" lean-forward="true" selection-start-line="390" selection-start-column="52" selection-end-line="390" selection-end-column="52" />
               <folding>
                 <element signature="e#73#94#0" expanded="true" />
               </folding>
@@ -473,7 +461,21 @@
       <option name="project" value="LOCAL" />
       <updated>1553715572165</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added GUI entities. Obstacles are not parsed yet. Grid drawed on canvas in order to represent set of blocks and routing in blocks">
+      <created>1555200506578</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1555200506578</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added GUI entities. Obstacles are not parsed yet. Grid drawed on canvas in order to represent set of blocks and routing in blocks">
+      <created>1555200808288</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1555200808288</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -532,7 +534,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add GUI interface (work not well). Added parsing of dwg file (construction foundation). Added parsing xslx file of input data." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add GUI interface (work not well). Added parsing of dwg file (construction foundation). Added parsing xslx file of input data." />
+    <MESSAGE value="Added GUI entities. Obstacles are not parsed yet. Grid drawed on canvas in order to represent set of blocks and routing in blocks" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added GUI entities. Obstacles are not parsed yet. Grid drawed on canvas in order to represent set of blocks and routing in blocks" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/envatcd/functions.py">
@@ -764,8 +767,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/windows.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="379" column="48" lean-forward="true" selection-start-line="379" selection-start-column="48" selection-end-line="379" selection-end-column="48" />
+        <state relative-caret-position="370">
+          <caret line="390" column="52" lean-forward="true" selection-start-line="390" selection-start-column="52" selection-end-line="390" selection-end-column="52" />
           <folding>
             <element signature="e#73#94#0" expanded="true" />
           </folding>
