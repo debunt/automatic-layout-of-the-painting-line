@@ -1,9 +1,11 @@
 #здесб подключаются все файлы, которые описывают интерфейс каждого окна
+
 from tkinter import *
 from constructor import *
 from tkinter import filedialog
 from tkinter import messagebox as mb
 import os
+from PIL import ImageTk, Image
 import parsing
 
 
@@ -84,7 +86,7 @@ class StartWindow(Windows):
 
     def show(self, data):
         super().clearFrame()
-
+        self.root.geometry('{}x{}+{}+{}'.format(self.w, self.h, 0, 0))
         l = Label(self.root, text="Автоматизированное создание\n планировки",
               font="Arial 16", bd=20, bg = 'white').place(anchor=CENTER, relx=0.5, rely=0.1)
 
@@ -113,7 +115,7 @@ class LoadProject(Windows):
 
     def show(self, data):
         super().clearFrame()
-
+        self.root.geometry('{}x{}+{}+{}'.format(self.w, self.h, 0, 0))
         l2 = Label(self.root, text="Загрузка",
               font="Arial 12", bd=20).place(anchor=W, relx=0.05, rely=0.05)
 
@@ -182,6 +184,7 @@ class CreateProject1(Windows):
 #TODO убрать поле
     def show(self, data):
         super().clearFrame()
+        self.root.geometry('{}x{}+{}+{}'.format(self.w, self.h, 0, 0))
         ###########################
         Label(self.root, text="1 Шаг",font="Arial 12", bd=5).grid(row=0, column=0,sticky='w')
         Label(self.root, text="Имя проекта",font="Arial 12", bd=5).grid(row=1, column=0, padx=2, pady=2, sticky='w')
@@ -240,39 +243,203 @@ class CreateProject2(Windows):
         return "CreateProject2"
     def __init__(self):
         super().__init__()
-        #self.frame = Frame(self.root)
+        self.w = 700
+        self.h = 900
         self.command = ""
         self.root.title('CreateProject1')
+        #self.labelCellSize = "" # размер 1 квадратой клетки
+        #self.labelWidthGrid = "" # ширина поля в клетках
+        #self.labelHeightGrid = "" # высота поля в клетках
+        self.entriesDict = dict() # словарь полей ввода
+        self.labelsDict = dict() # словарь лейблов, которые я буду изменять
+        self.checkButDict = dict()
+
+
+    #отоброзить сетку с препятствиями, кол-вом самих клеточек, тд.
+    def show_grid_canvas(self, row=20, column=0):
+        widthC = self.w - 10 # ширина канваса
+        heightC = 450 # высота канваса
+        c = Canvas(self.root, width=widthC, height=heightC, bg='white')
+        c.grid(row=row, column=column, rowspan=20, columnspan=6)
+
+        koefX = heightC/self.data["GridHeight"]
+        koefY = widthC/self.data["GridWidth"]
+        # рисую сетку
+        for x in range(self.data["GridWidth"] + 1):
+            c.create_line(x * koefY, 0, x * koefY, heightC)
+
+        for y in range(self.data["GridHeight"] + 1):
+            c.create_line(0, y * koefX, widthC, y * koefX)
+
+        #разкомментировать когда появятся препятствия
+        """
+        colors = ['#8EEBEC', "#4CC552", "#6CBB3C", "#FFE87C", "#FFCBA4", "#E9AB17", "#F75D59", "#9172EC",
+                  "#E78A61"]
+        #рисуем фигуры
+        for i, f in enumerate(figures):
+            c.create_rectangle(f.start_point.y*koef,f.start_point.x*koef,
+                               (f.finish_point.y + 1) * koef, (f.finish_point.x + 1)*koef,  fill=colors[i], width=3)
+            c.create_oval(f.start_point.y*koef - 5, f.start_point.x*koef - 5,
+                          f.start_point.y * koef + 5, f.start_point.x * koef + 5,fill=colors[i])
+            c.create_text((f.start_point.y + (f.finish_point.y - f.start_point.y + 1)/2)*koef,
+                          (f.start_point.x + (f.finish_point.x - f.start_point.x + 1) / 2)*koef,
+                          text=f.name, font="Verdana 10")
+        c.pack()
+        """
+
+
+    # calculation of grid size
+    def gridEvaluate(self, event):
+        for keyE, keyL in zip(["Ширина","Ширина Размещения","Высота Размещения"],["CellSize", "GridWidth", "GridHeight"]):
+
+            if keyL == "CellSize":
+                #сравниваем вначале ширину футура и шиирну детали, выбираем наибольшую
+                width_Part = float(self.entriesDict["Ширина"].get())
+                width_Futur = float(self.entriesDict["Futur"].get())
+
+                two_lambda = width_Part if width_Part >= width_Futur else width_Futur
+                self.data[keyL] = int(two_lambda * 5 / 2)  # расчет размера клетки
+            else:
+                self.data[keyL] = int(float(self.entriesDict[keyE].get()) / self.data["CellSize"])  # расчет ширины и высоты поля в клетках
+
+            self.labelsDict[keyL].configure(text=keyL + ": " + str(self.data[keyL]))
+
+        self.show_grid_canvas()
+
+
 
     def show(self, dataFromXslx):
         super().clearFrame()
-        print(dataFromXslx)
+        self.root.geometry('{}x{}+{}+{}'.format(self.w, self.h, 0, 0))
+        # TODO сделать итоговый адекватный словарь для передачи его модулю Алгоритма
+        self.data = dataFromXslx
+        self.entriesDict.clear() #очищаем словарь полей ввода
+        self.labelsDict.clear() #очищаем словарь лейблов
+
         #зная путь до таблицы, генерируем таюлицу на форме
-        keys = list(dataFromXslx.keys())
+        keys = list(self.data.keys())
         for i, key in enumerate(keys):  # Rows
             # TODO убрать отсюда Obstacles сделать разворачивающийся список с координатами препятствий, их ширинами и высотами
-            if key in ["Obstacles", "Строительная подоснова", "Чертеж кабины"]:
+            if key in ["Obstacles", "Строительная подоснова",
+                       "Чертеж кабины", "Grid"]:
                 continue
             if i in [0, 5, 9]:
                 nameLabel = Label(self.root, text=key, font='Helvetica 9 bold')
                 nameLabel.grid(row=i, column=0)
+
             else:
                 nameLabel = Label(self.root, text=key)
                 nameLabel.grid(row=i, column=0)
-            for j, content in enumerate(dataFromXslx[key]):  # Columns
+
+
+            for j, content in enumerate(self.data[key]):  # Columns
                 if i in [0,5,9] or j == 1:
                     b = Label(self.root, text=str(content))
                     b.grid(row=i, column=j+1)
                 else:
-                    if j == 2 and str(content) == "":
+                    if j == 2 and str(content) == "" and i <= 9: #условие i <=9 чтобы отрисовывать поля для названия операций
                         continue
                     b = Entry(self.root, text="")
-                    b.grid(row=i, column=j + 1)
+                    b.bind("<FocusOut>", self.gridEvaluate)
+                    b.grid(row=i, column=j + 1, sticky=N)
                     b.insert(0, str(content))
+                    self.entriesDict.update({key : b}) # создаем словарь полей ввода
+
+
+        # отрисовка результатов расчета Входных данных для алгоритма
+
+        #Крупный лейбл Параметры сетки
+        b = Label(self.root, text="Параметры сетки", font='Helvetica 9 bold')
+        b.grid(row=0, column=4)
+        b = Label(self.root, text="Ширина конвейера")
+        b.grid(row=1, column=4)
+
+        # создаем Поле для ввода ширины футура
+        e = Entry(self.root, justify='center', width=7)
+        self.entriesDict.update({"Futur" : e})
+        e.grid(row=2, column=4)
+        e.insert(0, str("200"))
+        e.bind("<FocusOut>", self.gridEvaluate)
+
+        #Вставляем фото сечения FUTUR
+        img = ImageTk.PhotoImage(Image.open("Files\Section FUTUR 100.PNG"))
+        foto_futur = Label(self.root, image=img)
+        foto_futur.grid(row=3, column=4, rowspan=5, sticky=N)
+
+
+
+
+
+        #TODO занести в словарь координаты препятствий (в клетках)
+        self.data.update({"Obstacles": {}}) #добавить потом препятствия в порядковом возврастании
+        #в конце заносим новые данные (размер клетки, ширина и высота поля в клетках) в общий словарь
+        for i, newKey in enumerate(["CellSize", "GridWidth", "GridHeight"]):
+            l = Label(self.root)
+            l.grid(row=8+i, column=4, sticky=N)
+            self.data.update({newKey: 0})
+            self.labelsDict.update({newKey : l})
+        keys = list(self.data.keys())
+        print(keys)
+        self.gridEvaluate(None) # выполнить первичный расчет
+
+        # Крупный лейбл Расстояние креплений
+        b = Label(self.root, text="Расстояние креплений", font='Helvetica 9 bold')
+        b.grid(row=11, column=4)
+
+        # создаем Поле для ввода расстояние крепления
+        e = Entry(self.root, justify='center', width=7)
+        self.entriesDict.update({"Attach_width": e})
+        e.grid(row=12, column=4)
+        e.insert(0, str("4000"))
+        e.bind("<FocusOut>", self.gridEvaluate)
+
+        # Вставляем фото чертежа крепления детали
+        img2 = ImageTk.PhotoImage(Image.open("Files/attachment_100.png"))
+        foto_attach = Label(self.root, image=img2)
+        foto_attach.grid(row=13, column=4, rowspan=3, sticky=N)
+
+        # Крупный лейбл Остальные параметры
+        b = Label(self.root, text="Параметры печи", font='Helvetica 9 bold')
+        b.grid(row=0, column=5)
+
+        cvar1 = BooleanVar()
+        cvar1.set(0)
+        c1 = Checkbutton(text="Электронагрев", variable=cvar1, onvalue=1, offvalue=0)
+        self.checkButDict.update({"Электронагрев" : cvar1})
+        c1.grid(row=1, column=5, sticky=W)
+
+        cvar2 = BooleanVar()
+        cvar2.set(0)
+        c1 = Checkbutton(text="Воздушная завеса", variable=cvar2, onvalue=1, offvalue=0)
+        self.checkButDict.update({"ЭВоздушная завеса": cvar2})
+        c1.grid(row=2, column=5, sticky=W)
+
+        b = Label(self.root, text="Кабина нанесения\nкраски:", font='Helvetica 9 bold')
+        b.grid(row=3, column=5)
+
+        r_var = BooleanVar()
+        r_var.set(0)
+        radBut = []
+        r1 = Radiobutton(text='Серия ТМХ', variable=r_var, value=0)
+        r2 = Radiobutton(text='Q-MAX', variable=r_var, value=1)
+        r3 = Radiobutton(text='Wagner', variable=r_var, value=2)
+        r4 = Radiobutton(text='ColorMax', variable=r_var, value=3)
+        r1.grid(row=4, column=5, sticky=W)
+        r2.grid(row=5, column=5, sticky=W)
+        r3.grid(row=6, column=5, sticky=W)
+        r4.grid(row=7, column=5, sticky=W)
+
+
+
         super().defaultButtons(row=18)
+
+
+
         return self.startloop()
 
 
+#это окно будет отрисовывать окно с полученнрй планировкой, а также будут кнопки для отрисовки данного алгоритма в
+# AutoCAD, NX
 class GenerateSolution(Windows):
 
     def __str__(self):  # метод __str__, позволяющий переопределить то, как будет печататься объект:

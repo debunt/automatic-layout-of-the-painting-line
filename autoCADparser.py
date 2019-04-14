@@ -17,18 +17,23 @@ class parseDWG:
     def show(self, data):
         self.data = data
         self.acad = Autocad(create_if_not_exists=True)  # so far app is not open
-        self.path2dwg = self.data["Строительная подоснова"]#считываем путь до строительной подосновы
+        self.path2dwg = self.data["Строительная подоснова"]# refer to the key to the field where the link to this file
         if self.path2dwg == "":
             return "next" #если не указан путь до файла, то перейти к следующему объекту
+        # TODO create windows attention about that in that time autocad will be opened
         self.acad.Application.Documents.open(self.path2dwg)
         self._read()
+        self.acad.Application.Documents.close() # close previous file in autocad
+
+
         return "next"
 
-    #returns coordinate of base point, width and height of figure
+    #returns coordinate of base point, width and height of each figure on the list
     def _getBPoint_W_H(self, listCoordinates):
         maxindexes = [i * 2 + 1 for i, j in enumerate(listCoordinates[1::2]) if j == max(
-            listCoordinates[1::2])]  # возвращает индексы списка tempBoundaries максимальных элементов по Y оси
+            listCoordinates[1::2])]  # возвращает индексы максимальных элементов по Y координате ( поэтому я указал отсчет со 2 элемента)
         minindexes = [i * 2 for i, j in enumerate(listCoordinates[0::2]) if j == min(listCoordinates[0::2])]
+        #теперь находим все минимальные
         indexbP = [i for i in maxindexes if (i - 1) in minindexes]  # find index of Y of base Point
         indexbP = [indexbP[0] - 1] + indexbP  # find index of X of base Point
         basePoint = Coordinate(listCoordinates[indexbP[0]], listCoordinates[indexbP[1]])  # object, consist of x and y
