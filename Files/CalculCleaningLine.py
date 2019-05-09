@@ -1,11 +1,4 @@
-#Calculation general sizes of Cleaning Line (AХПП)
-#before start, download pandas, xlrd in virtual environment
 
-import xlrd
-import pprint
-
-##class EquipmentBase:
-  #  def __init__(self, )
 
 class Data:
     

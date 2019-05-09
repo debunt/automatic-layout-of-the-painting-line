@@ -6,6 +6,7 @@ from tkinter import filedialog
 from tkinter import messagebox as mb
 import os
 from PIL import ImageTk, Image
+from calcEquipment import *
 import parsing
 
 
@@ -253,6 +254,25 @@ class CreateProject2(Windows):
         self.entriesDict = dict() # словарь полей ввода
         self.labelsDict = dict() # словарь лейблов, которые я буду изменять
         self.checkButDict = dict()
+        self.data2algoritm = dict() # данные для алгоритма, которые будут в виде:
+
+    '''wid_hei_dict = {
+        1: [2, 4, '1_АХПП'],
+        2: [1, 3, '2_Печь'],
+        3: [3, 3, '3_Печь_2'],
+        4: [3, 5, '4_Кабина'],
+        5: [3, 2, '5_Зона Загрузки'],
+        6: [5, 3, '6_Зона Выгрузки'],
+    }'''
+
+
+    def update_data(self):
+        print(self.data.keys())
+        for key in self.entriesDict.keys():
+            self.data[key] = self.entriesDict[key].get()
+        for key in self.checkButDict.keys():
+            self.data[key] = self.checkButDict[key].get()
+        print(self.data)
 
 
     #отоброзить сетку с препятствиями, кол-вом самих клеточек, тд.
@@ -304,6 +324,8 @@ class CreateProject2(Windows):
 
             self.labelsDict[keyL].configure(text=keyL + ": " + str(self.data[keyL]))
 
+        self.update_data()
+        #TODO впихнуть сюда генерацию эквипмента
         self.show_grid_canvas()
 
 
@@ -343,8 +365,10 @@ class CreateProject2(Windows):
                     b.bind("<FocusOut>", self.gridEvaluate)
                     b.grid(row=i, column=j + 1, sticky=N)
                     b.insert(0, str(content))
-                    self.entriesDict.update({key : b}) # создаем словарь полей ввода
-
+                    if key in self.entriesDict.keys():
+                        self.entriesDict.update({str(key + " name") : b})  # создаем словарь полей ввода.
+                    else:
+                        self.entriesDict.update({key : b}) # создаем словарь полей ввода.
 
         # отрисовка результатов расчета Входных данных для алгоритма
 
@@ -365,10 +389,6 @@ class CreateProject2(Windows):
         img = ImageTk.PhotoImage(Image.open("Files\Section FUTUR 100.PNG"))
         foto_futur = Label(self.root, image=img)
         foto_futur.grid(row=3, column=4, rowspan=5, sticky=N)
-
-
-
-
 
         #TODO занести в словарь координаты препятствий (в клетках)
         self.data.update({"Obstacles": {}}) #добавить потом препятствия в порядковом возврастании
@@ -396,7 +416,7 @@ class CreateProject2(Windows):
         # Вставляем фото чертежа крепления детали
         img2 = ImageTk.PhotoImage(Image.open("Files/attachment_100.png"))
         foto_attach = Label(self.root, image=img2)
-        foto_attach.grid(row=13, column=4, rowspan=3, sticky=N)
+        foto_attach.grid(row=13, column=4, rowspan=4, sticky=N)
 
         # Крупный лейбл Остальные параметры
         b = Label(self.root, text="Параметры печи", font='Helvetica 9 bold')
@@ -411,24 +431,45 @@ class CreateProject2(Windows):
         cvar2 = BooleanVar()
         cvar2.set(0)
         c1 = Checkbutton(text="Воздушная завеса", variable=cvar2, onvalue=1, offvalue=0)
-        self.checkButDict.update({"ЭВоздушная завеса": cvar2})
+        self.checkButDict.update({"Воздушная завеса": cvar2})
         c1.grid(row=2, column=5, sticky=W)
 
-        b = Label(self.root, text="Кабина нанесения\nкраски:", font='Helvetica 9 bold')
-        b.grid(row=3, column=5)
+        b = Label(self.root, text="Кол-во завес")
+        b.grid(row=3, column=5,sticky="W")
 
-        r_var = BooleanVar()
-        r_var.set(0)
-        radBut = []
-        r1 = Radiobutton(text='Серия ТМХ', variable=r_var, value=0)
-        r2 = Radiobutton(text='Q-MAX', variable=r_var, value=1)
-        r3 = Radiobutton(text='Wagner', variable=r_var, value=2)
-        r4 = Radiobutton(text='ColorMax', variable=r_var, value=3)
-        r1.grid(row=4, column=5, sticky=W)
-        r2.grid(row=5, column=5, sticky=W)
-        r3.grid(row=6, column=5, sticky=W)
-        r4.grid(row=7, column=5, sticky=W)
+        # создаем Поле для ввода кол-ва воздушных завес
+        e = Entry(self.root, justify='center', width=7)
+        self.entriesDict.update({"numAir": e})
+        e.grid(row=3, column=5, sticky="E")
+        e.insert(0, str("0"))
+        e.bind("<FocusOut>", self.gridEvaluate)
 
+        b = Label(self.root, text="Кабина нанесения\nкраски", font='Helvetica 9 bold')
+        b.grid(row=4, column=5, rowspan=2)
+
+        r_var = StringVar()
+        r_var.set("Q-MAX")
+        r1 = Radiobutton(text='Серия ТМХ', variable=r_var, value="Серия ТМХ")
+        r2 = Radiobutton(text='Q-MAX', variable=r_var, value="Q-MAX")
+        r3 = Radiobutton(text='Wagner', variable=r_var, value="Wagner")
+        r4 = Radiobutton(text='ColorMax', variable=r_var, value="ColorMax")
+        r1.grid(row=6, column=5, sticky=W)
+        r2.grid(row=7, column=5, sticky=W)
+        r3.grid(row=8, column=5, sticky=W)
+        r4.grid(row=9, column=5, sticky=W)
+        self.checkButDict.update({"Кабина покраски": r_var})
+
+        # Крупный лейбл Остальные параметры
+        b = Label(self.root, text="Радиус поворотов", font='Helvetica 9 bold')
+        b.grid(row=10, column=5)
+
+        radius = IntVar()
+        radius.set(500)
+        r1 = Radiobutton(text='500 мм', variable=radius, value=500)
+        r2 = Radiobutton(text='750 мм', variable=radius, value=750)
+        r1.grid(row=11, column=5, sticky=W)
+        r2.grid(row=12, column=5, sticky=W)
+        self.checkButDict.update({"Radius": radius})
 
 
         super().defaultButtons(row=18)
@@ -452,6 +493,10 @@ class GenerateSolution(Windows):
 
     def show(self, data):
         super().clearFrame()
+        self.data = data #
+        print("Last Window", self.data)
+        #Equipment.getBlocks(data)
+        eq = Equipment(data)
 
         Label(self.root, text="GenerateSolution",
               font="Arial 12", bd=20).place(anchor=W, relx=0.05, rely=0.05)
