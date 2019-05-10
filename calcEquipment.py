@@ -104,6 +104,7 @@ class Oven():
                          "h": float(data['Высота'])}
         self.speed = float(data['Скорость конвейера'])
         self.L_work = float(data[type]) * float(data['Скорость конвейера']) * 1000 # мин * м/мин * 1000 мм
+
         self.configurations = {"oneLoop": self.oneLoop,
                                "twoLoop": self.twoLoop,
                                "fourLoop": self.fourLoop,
@@ -111,6 +112,9 @@ class Oven():
         self.path = "Files/standarts.json"  # путь до JSON файла
         with open(self.path, 'r', encoding="utf-8") as f:
             self.standarts = json.loads(f.read())
+        self.EF = self.distSide(R=int(self.data['Radius']), BC=int(self.data['Attach_width']),
+                           GL=self.unit_whl["w"], DG=self.unit_whl["w"],
+                           ED=self.standarts["Oven"]["minWallTurn"][1])
 
 
     def get(self, config): # config - название конфигурации
@@ -165,18 +169,10 @@ class Oven():
         self.sizes = dict()
         l_straight = (self.L_work - np.pi*float(self.data['Radius']))/2 + stdrt["minEntr"][1] +\
                            (int(self.data['numAir'])*stdrt["airСurtain"][1])
-
-        # BC расстояние между креплениями
-        # R радиус поворота
-        # GL ширина детали
-        # DG длина детали
-        # ED требуемый запас по расстоянию
-        EF = self.distSide(R=int(self.data['Radius']), BC=int(self.data['Attach_width']),
-                      GL=self.unit_whl["w"], DG=self.unit_whl["w"], ED=stdrt["minWallTurn"][1])
-        totalLenght = l_straight + float(self.data['Radius']) + EF
+        totalLenght = l_straight + float(self.data['Radius']) + self.EF
         totalLenght = round(totalLenght * 2 + 499, -3) // 2  # кратно 500
         self.sizes.update({"totalLenght" : totalLenght})
-        width = self.unit_whl["w"]*2 + 2*(float(self.data['Radius'])+
+        width = self.unit_whl["w"] + 2*(float(self.data['Radius'])+
                                         stdrt["minWallEntr"][1] + stdrt["thicknessSandwich"][1])
 
         width = round(width + 99, -2)  # кратно 100
@@ -200,31 +196,60 @@ class Oven():
         inx = stdrt["minWallEntr"][1] + stdrt["thicknessSandwich"][1] + self.unit_whl["w"]/2
         outx = inx + 2*self.data['Radius']
         self.sizes.update({"In": Coordinate(inx, 0)})  # in_point
-        self.sizes.update({"Out": Coordinate(self.sizes["width"] / 2, self.sizes["totalLenght"])})  # out_point
+        self.sizes.update({"Out": Coordinate(outx, 0)})  # out_point
         return self.sizes
 
     # 4-ех петелечная. Вход и выход в разных местах
-    def fourLoop(self, standarts):
+    def fourLoop(self, stdrt):
         self.sizes = dict()
-        # Расчет координат входа/выхода относительно start_point
-        '''
-        s -------------------- L ----- Y
-        |                      |
-        IN                     |
-        |       Dryer/Oven     |
-       OUT                     |
-        |                      |
-        W -------------------- f
-        |
-        |
-        X
-        '''
-        return 1
+
+        l_straight = (self.L_work - 3*np.pi * float(self.data['Radius']) + \
+                      2*(stdrt["minEntr"][1] + int(self.data['numAir']) * stdrt["airСurtain"][1]) + \
+                      self.EF + float(self.data['Radius'])) / 4
+
+        totalLenght = l_straight + float(self.data['Radius']) + self.EF
+        totalLenght = round(totalLenght * 2 + 499, -3) // 2  # кратно 500
+        self.sizes.update({"totalLenght": totalLenght})
+        width = self.unit_whl["w"] * 2 + 2 * (stdrt["minWallEntr"][1] + stdrt["thicknessSandwich"][1]) + \
+                    6 * float(self.data['Radius'])
+
+        width = round(width + 99, -2)  # кратно 100
+        minWidth = stdrt["minWidthElectro"][1] if self.data['Электронагрев'] else stdrt["minWidth"][1]
+        width = minWidth if width < minWidth else width # проверка на миним ширину
+        self.sizes.update({"width": width})
+
+        inx = stdrt["minWallEntr"][1] + stdrt["thicknessSandwich"][1] + self.unit_whl["w"] / 2
+        outx = inx + 6 * self.data['Radius']
+        self.sizes.update({"In": Coordinate(inx, 0)})  # in_point
+        self.sizes.update({"Out": Coordinate(outx, 0)})  # out_point
+        return self.sizes
 
     #с 4 петельками, выход и вход расположены рядом
-    def snake(self, standarts):
+    def snake(self, stdrt):
         self.sizes = dict()
-        return 1
+
+        l_straight = self.L_work - 2 * (stdrt["minEntr"][1] + int(self.data['numAir']) * stdrt["airСurtain"][1])+\
+            4*self.EF + float(self.data['Radius']) - stdrt["minBtwProducts"][1] - \
+                      3 * np.pi * float(self.data['Radius'])
+        totalLenght = l_straight + float(self.data['Radius']) + self.EF
+        totalLenght = round(totalLenght * 2 + 499, -3) // 2  # кратно 500
+        self.sizes.update({"totalLenght": totalLenght})
+
+
+        width = self.unit_whl["w"]*2 + 2 * (stdrt["minWallEntr"][1] + stdrt["thicknessSandwich"][1]) + \
+                4 * float(self.data['Radius']) + stdrt["minBtwProducts"][1]
+
+        width = round(width + 99, -2)  # кратно 100
+        minWidth = stdrt["minWidthElectro"][1] if self.data['Электронагрев'] else stdrt["minWidth"][1]
+        width = minWidth if width < minWidth else width  # проверка на миним ширину
+        self.sizes.update({"width": width})
+
+        inx = stdrt["minWallEntr"][1] + stdrt["thicknessSandwich"][1] + self.unit_whl["w"] / 2
+        outx = inx + self.unit_whl["w"] + stdrt["minBtwProducts"][1]
+        self.sizes.update({"In": Coordinate(inx, 0)})  # in_point
+        self.sizes.update({"Out": Coordinate(outx, 0)})  # out_point
+
+        return self.sizes
 
 
 class Equipment():

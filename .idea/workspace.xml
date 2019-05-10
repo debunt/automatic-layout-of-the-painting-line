@@ -6,14 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0662e225-8caa-4d73-b908-04814577d02f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Files/standarts.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Routing_A_Star.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/calcEquipment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proba.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Files/CalculCleaningLine.py" beforeDir="false" afterPath="$PROJECT_DIR$/Files/CalculCleaningLine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows.py" beforeDir="false" afterPath="$PROJECT_DIR$/windows.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calcEquipment.py" beforeDir="false" afterPath="$PROJECT_DIR$/calcEquipment.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -68,95 +62,75 @@
         <counts>
           <entry key="Python Console" value="34" />
           <entry key="json" value="592" />
-          <entry key="py" value="33071" />
+          <entry key="py" value="33259" />
           <entry key="spec" value="1" />
-          <entry key="txt" value="277" />
+          <entry key="txt" value="725" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="592" />
-          <entry key="PLAIN_TEXT" value="278" />
-          <entry key="Python" value="33105" />
+          <entry key="PLAIN_TEXT" value="726" />
+          <entry key="Python" value="33293" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5019305">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/commomClasses.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="360">
-                  <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="25" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/calcEquipment.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="360">
-                  <caret line="122" column="36" selection-start-line="122" selection-start-column="36" selection-end-line="122" selection-end-column="36" />
-                  <folding>
-                    <element signature="e#0#18#0" expanded="true" />
-                    <element signature="e#167#3819#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Files/standarts.json">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1040">
-                  <caret line="52" column="4" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="17" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/windows.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="478">
-                  <caret line="498" column="8" selection-start-line="498" selection-start-column="8" selection-end-line="498" selection-end-column="28" />
-                  <folding>
-                    <element signature="e#73#94#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/main.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="120">
-                  <caret line="6" selection-start-line="6" selection-end-line="11" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/proba.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="120">
-                  <caret line="6" column="928" selection-start-line="6" selection-start-column="928" selection-end-line="6" selection-end-column="928" />
-                  <folding>
-                    <element signature="e#1#28#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/commomClasses.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/calcEquipment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-638">
+              <caret line="199" column="8" selection-start-line="199" selection-start-column="8" selection-end-line="199" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#167#3819#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Files/standarts.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-18">
+              <caret line="36" column="11" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/windows.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="478">
+              <caret line="498" column="8" selection-start-line="498" selection-start-column="8" selection-end-line="498" selection-end-column="28" />
+              <folding>
+                <element signature="e#73#94#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="6" selection-start-line="6" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -188,6 +162,7 @@
       <find>standarts</find>
       <find>pi</find>
       <find>data</find>
+      <find>EF</find>
     </findStrings>
     <replaceStrings>
       <replace>base_point, sizes, phi)</replace>
@@ -235,13 +210,13 @@
         <option value="$PROJECT_DIR$/Routing_A_Star.py" />
         <option value="$PROJECT_DIR$/Files/standarts.json" />
         <option value="$PROJECT_DIR$/windows.py" />
-        <option value="$PROJECT_DIR$/calcEquipment.py" />
         <option value="$PROJECT_DIR$/proba.py" />
+        <option value="$PROJECT_DIR$/calcEquipment.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1273" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
     <option name="width" value="1294" />
     <option name="height" value="1087" />
   </component>
@@ -502,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1555201269211</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Добавлена пробная main функция proba.py. Она тестирует новый модуль calcEquipment. calcEquipmen модуль содержит класс АХПП, Oven. В них происходит генерация фигур. Oven на данный момент генерирутет однопетелечную и двухпетелечную Сушку. Проверено с проектом Брендфорд. Размеры совподают с допуском в 3-5%. Ни одной печи полимеризации на данный момент не генерируется.&#10;Добавлен JSON файл, содержащий стандарты проектирования блоков.">
+      <created>1557441769026</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1557441769026</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -515,15 +497,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1096" extended-state="6" />
+    <frame x="-7" y="0" width="1294" height="1087" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.081560284" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.035828024" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4960191" visible="true" weight="0.23180874" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4960191" visible="true" weight="0.2339979" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49761146" weight="0.204617" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -562,7 +544,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add GUI interface (work not well). Added parsing of dwg file (construction foundation). Added parsing xslx file of input data." />
     <MESSAGE value="Added GUI entities. Obstacles are not parsed yet. Grid drawed on canvas in order to represent set of blocks and routing in blocks" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added GUI entities. Obstacles are not parsed yet. Grid drawed on canvas in order to represent set of blocks and routing in blocks" />
+    <MESSAGE value="Добавлена пробная main функция proba.py. Она тестирует новый модуль calcEquipment. calcEquipmen модуль содержит класс АХПП, Oven. В них происходит генерация фигур. Oven на данный момент генерирутет однопетелечную и двухпетелечную Сушку. Проверено с проектом Брендфорд. Размеры совподают с допуском в 3-5%. Ни одной печи полимеризации на данный момент не генерируется.&#10;Добавлен JSON файл, содержащий стандарты проектирования блоков." />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлена пробная main функция proba.py. Она тестирует новый модуль calcEquipment. calcEquipmen модуль содержит класс АХПП, Oven. В них происходит генерация фигур. Oven на данный момент генерирутет однопетелечную и двухпетелечную Сушку. Проверено с проектом Брендфорд. Размеры совподают с допуском в 3-5%. Ни одной печи полимеризации на данный момент не генерируется.&#10;Добавлен JSON файл, содержащий стандарты проектирования блоков." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/envatcd/Lib/site-packages/pyautocad/compat.py">
@@ -770,13 +753,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Files/standarts.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1040">
-          <caret line="52" column="4" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Files/CalculCleaningLine.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
@@ -794,23 +770,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/calcEquipment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="122" column="36" selection-start-line="122" selection-start-column="36" selection-end-line="122" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#167#3819#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proba.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="6" column="928" selection-start-line="6" selection-start-column="928" selection-end-line="6" selection-end-column="928" />
           <folding>
             <element signature="e#1#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Files/standarts.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-18">
+          <caret line="36" column="11" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/calcEquipment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-638">
+          <caret line="199" column="8" selection-start-line="199" selection-start-column="8" selection-end-line="199" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#167#3819#0" />
           </folding>
         </state>
       </provider>
