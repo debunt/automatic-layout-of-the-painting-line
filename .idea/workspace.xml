@@ -7,7 +7,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0662e225-8caa-4d73-b908-04814577d02f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Routing_A_Star.py" beforeDir="false" afterPath="$PROJECT_DIR$/Routing_A_Star.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/calcEquipment.py" beforeDir="false" afterPath="$PROJECT_DIR$/calcEquipment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proba.py" beforeDir="false" afterPath="$PROJECT_DIR$/proba.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows.py" beforeDir="false" afterPath="$PROJECT_DIR$/windows.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Входные_Данные.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Входные_Данные.xlsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,12 +23,12 @@
     <session id="411722469">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="39" />
+          <entry key="project.closed" value="41" />
           <entry key="project.open.time.1" value="9" />
-          <entry key="project.open.time.10" value="2" />
+          <entry key="project.open.time.10" value="3" />
           <entry key="project.open.time.11" value="3" />
           <entry key="project.open.time.12" value="2" />
-          <entry key="project.open.time.13" value="2" />
+          <entry key="project.open.time.13" value="3" />
           <entry key="project.open.time.14" value="2" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.2" value="3" />
@@ -34,7 +38,7 @@
           <entry key="project.open.time.7" value="5" />
           <entry key="project.open.time.8" value="5" />
           <entry key="project.open.time.9" value="8" />
-          <entry key="project.opened" value="47" />
+          <entry key="project.opened" value="49" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -45,7 +49,7 @@
           <entry key="json" value="1" />
           <entry key="kv" value="1" />
           <entry key="png" value="1" />
-          <entry key="py" value="99" />
+          <entry key="py" value="105" />
           <entry key="spec" value="2" />
         </counts>
       </usages-collector>
@@ -55,23 +59,23 @@
           <entry key="Image" value="5" />
           <entry key="JSON" value="1" />
           <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="99" />
+          <entry key="Python" value="105" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="34" />
           <entry key="json" value="592" />
-          <entry key="py" value="33259" />
+          <entry key="py" value="36608" />
           <entry key="spec" value="1" />
-          <entry key="txt" value="725" />
+          <entry key="txt" value="810" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="592" />
-          <entry key="PLAIN_TEXT" value="726" />
-          <entry key="Python" value="33293" />
+          <entry key="PLAIN_TEXT" value="811" />
+          <entry key="Python" value="36642" />
         </counts>
       </usages-collector>
     </session>
@@ -79,32 +83,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/commomClasses.py">
+        <entry file="file://$PROJECT_DIR$/Files/standarts.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/calcEquipment.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-638">
-              <caret line="199" column="8" selection-start-line="199" selection-start-column="8" selection-end-line="199" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#167#3819#0" />
-              </folding>
+            <state relative-caret-position="105">
+              <caret line="31" column="6" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Files/standarts.json">
+        <entry file="file://$PROJECT_DIR$/calcEquipment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-18">
-              <caret line="36" column="11" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
+            <state relative-caret-position="273">
+              <caret line="337" column="27" lean-forward="true" selection-start-line="337" selection-start-column="27" selection-end-line="337" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -112,8 +106,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/windows.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="498" column="8" selection-start-line="498" selection-start-column="8" selection-end-line="498" selection-end-column="28" />
+            <state relative-caret-position="651">
+              <caret line="345" column="45" selection-start-line="345" selection-start-column="45" selection-end-line="345" selection-end-column="45" />
               <folding>
                 <element signature="e#73#94#0" expanded="true" />
               </folding>
@@ -126,6 +120,28 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
               <caret line="6" selection-start-line="6" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/proba.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="7" column="527" lean-forward="true" selection-start-line="7" selection-start-column="527" selection-end-line="7" selection-end-column="537" />
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+              <folding>
+                <element signature="e#1#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Routing_A_Star.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -152,7 +168,6 @@
       <find>super()._</find>
       <find>startloop</find>
       <find>contentFields</find>
-      <find>print</find>
       <find>def get</find>
       <find>defaultButtons</find>
       <find>Ванн</find>
@@ -163,6 +178,8 @@
       <find>pi</find>
       <find>data</find>
       <find>EF</find>
+      <find>show</find>
+      <find>print</find>
     </findStrings>
     <replaceStrings>
       <replace>base_point, sizes, phi)</replace>
@@ -207,9 +224,9 @@
         <option value="$PROJECT_DIR$/windows/GUI.py" />
         <option value="$PROJECT_DIR$/windows/canvas.py" />
         <option value="$PROJECT_DIR$/Files/CalculCleaningLine.py" />
-        <option value="$PROJECT_DIR$/Routing_A_Star.py" />
         <option value="$PROJECT_DIR$/Files/standarts.json" />
         <option value="$PROJECT_DIR$/windows.py" />
+        <option value="$PROJECT_DIR$/Routing_A_Star.py" />
         <option value="$PROJECT_DIR$/proba.py" />
         <option value="$PROJECT_DIR$/calcEquipment.py" />
       </list>
@@ -484,7 +501,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557441769026</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Расчет 4 конфигурации сушки готов. Есть ошибка при расчете конфигурации &quot;Snake&quot;">
+      <created>1557446875587</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1557446875587</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -497,10 +521,28 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1294" height="1087" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="2576" height="1096" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.035828024" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10677699" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4960191" visible="true" weight="0.22765073" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49761146" weight="0.2037422" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.23084995" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49960598" weight="0.21091291" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5047771" side_tool="true" weight="0.22770199" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.33053514" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24914384" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13694267" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -517,25 +559,6 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24914384" />
-    </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15294118" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4960191" visible="true" weight="0.3347324" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49761146" weight="0.204617" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.23084995" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49960598" weight="0.21091291" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5047771" side_tool="true" weight="0.22770199" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.33053514" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24920508" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -545,7 +568,8 @@
     <MESSAGE value="Add GUI interface (work not well). Added parsing of dwg file (construction foundation). Added parsing xslx file of input data." />
     <MESSAGE value="Added GUI entities. Obstacles are not parsed yet. Grid drawed on canvas in order to represent set of blocks and routing in blocks" />
     <MESSAGE value="Добавлена пробная main функция proba.py. Она тестирует новый модуль calcEquipment. calcEquipmen модуль содержит класс АХПП, Oven. В них происходит генерация фигур. Oven на данный момент генерирутет однопетелечную и двухпетелечную Сушку. Проверено с проектом Брендфорд. Размеры совподают с допуском в 3-5%. Ни одной печи полимеризации на данный момент не генерируется.&#10;Добавлен JSON файл, содержащий стандарты проектирования блоков." />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлена пробная main функция proba.py. Она тестирует новый модуль calcEquipment. calcEquipmen модуль содержит класс АХПП, Oven. В них происходит генерация фигур. Oven на данный момент генерирутет однопетелечную и двухпетелечную Сушку. Проверено с проектом Брендфорд. Размеры совподают с допуском в 3-5%. Ни одной печи полимеризации на данный момент не генерируется.&#10;Добавлен JSON файл, содержащий стандарты проектирования блоков." />
+    <MESSAGE value="Расчет 4 конфигурации сушки готов. Есть ошибка при расчете конфигурации &quot;Snake&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Расчет 4 конфигурации сушки готов. Есть ошибка при расчете конфигурации &quot;Snake&quot;" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/envatcd/Lib/site-packages/pyautocad/compat.py">
@@ -702,13 +726,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Routing_A_Star.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="28" lean-forward="true" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/parsing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -720,9 +737,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="666">
           <caret line="54" selection-start-line="54" selection-end-line="54" />
-          <folding>
-            <element signature="e#45#66#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -730,9 +744,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="14" column="52" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Files/CalculCleaningLine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -743,26 +761,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/windows.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="498" column="8" selection-start-line="498" selection-start-column="8" selection-end-line="498" selection-end-column="28" />
-          <folding>
-            <element signature="e#73#94#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Files/CalculCleaningLine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
-          <folding>
-            <element signature="e#915#3207#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -770,30 +768,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proba.py">
+    <entry file="file://$PROJECT_DIR$/Files/standarts.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="928" selection-start-line="6" selection-start-column="928" selection-end-line="6" selection-end-column="928" />
-          <folding>
-            <element signature="e#1#28#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="105">
+          <caret line="31" column="6" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Files/standarts.json">
+    <entry file="file://$PROJECT_DIR$/Routing_A_Star.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-18">
-          <caret line="36" column="11" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
+        <state relative-caret-position="220">
+          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/windows.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="345" column="45" selection-start-line="345" selection-start-column="45" selection-end-line="345" selection-end-column="45" />
+          <folding>
+            <element signature="e#73#94#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/calcEquipment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-638">
-          <caret line="199" column="8" selection-start-line="199" selection-start-column="8" selection-end-line="199" selection-end-column="8" />
+        <state relative-caret-position="273">
+          <caret line="337" column="27" lean-forward="true" selection-start-line="337" selection-start-column="27" selection-end-line="337" selection-end-column="27" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#167#3819#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proba.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="7" column="527" lean-forward="true" selection-start-line="7" selection-start-column="527" selection-end-line="7" selection-end-column="537" />
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#1#28#0" expanded="true" />
           </folding>
         </state>
       </provider>

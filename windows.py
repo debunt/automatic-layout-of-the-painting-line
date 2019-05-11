@@ -266,6 +266,7 @@ class CreateProject2(Windows):
     }'''
 
 
+
     def update_data(self):
         print(self.data.keys())
         for key in self.entriesDict.keys():
@@ -308,17 +309,41 @@ class CreateProject2(Windows):
         """
 
 
-    # calculation of grid size
+    # calculation of grid size. Расчет см. в docx файле
     def gridEvaluate(self, event):
+
         for keyE, keyL in zip(["Ширина","Ширина Размещения","Высота Размещения"],["CellSize", "GridWidth", "GridHeight"]):
 
             if keyL == "CellSize":
-                #сравниваем вначале ширину футура и шиирну детали, выбираем наибольшую
-                width_Part = float(self.entriesDict["Ширина"].get())
-                width_Futur = float(self.entriesDict["Futur"].get())
+                try:
+                    #загружаем требуемые переменные
+                    AB = CE = float(self.entriesDict["Ширина"].get())/2
+                    BC = 150 #TODO добавить чтение JSON файла данного параметра
+                    TP = LD = float(self.entriesDict["Attach_width"].get())
+                    DE = (float(self.entriesDict['Длина'].get()) - TP)/2
+                    #R = float(self.entriesDict["Radius"].get()) #TODO починить, радиус в форме задается с помощью radioButtons
+                    R = 750
+                    print("**")
+                except KeyError: #TODO избавиться от костыля, проверять наличие требуемых переменных из какого нибудь листа
+                    self.data[keyL] = 1000
+                    continue
+                DF = R * (1 - np.cos(np.pi/4))
+                GF = R * np.cos(np.pi/4)
+                GD = GF - DF
+                MD = GD * np.sin(np.pi/4)
+                MLD = np.rad2deg(np.arcsin(MD/LD))
+                LDG = 180 - 45 - MLD
+                CDE = np.rad2deg(np.arctan(CE/DE))
+                GDK = 180 - LDG - CDE
+                DC = np.sqrt(CE**2 + DE**2)
+                DH = DC * np.cos(np.deg2rad(GDK))
+                HG = DH - GD
+                GT = TP/np.sqrt(2)
+                GO = np.sqrt(GT**2 - (TP/2)**2)
+                BO = AB + BC + HG + GO
+                lamb = BO * np.sin(np.pi/4) #искомая лямбда
 
-                two_lambda = width_Part if width_Part >= width_Futur else width_Futur
-                self.data[keyL] = int(two_lambda * 5 / 2)  # расчет размера клетки
+                self.data[keyL] = round(lamb)
             else:
                 self.data[keyL] = int(float(self.entriesDict[keyE].get()) / self.data["CellSize"])  # расчет ширины и высоты поля в клетках
 
@@ -410,7 +435,7 @@ class CreateProject2(Windows):
         e = Entry(self.root, justify='center', width=7)
         self.entriesDict.update({"Attach_width": e})
         e.grid(row=12, column=4)
-        e.insert(0, str("4000"))
+        e.insert(0, str("2800"))
         e.bind("<FocusOut>", self.gridEvaluate)
 
         # Вставляем фото чертежа крепления детали

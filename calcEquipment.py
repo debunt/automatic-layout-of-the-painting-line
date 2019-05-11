@@ -1,6 +1,8 @@
 import numpy as np
 import json
 from Routing_A_Star import Coordinate
+import copy
+import math
 
 
 #Обсчет всех геометрических параметров АХПП определяется в этом классе
@@ -46,7 +48,6 @@ class AHPP:  # AХПП
 
             try:
                 if data[curBath] == "" or float(data[curBath]) < 1:
-                    print(data[curBath])
                     continue
             except ValueError:
                     continue
@@ -71,7 +72,6 @@ class AHPP:  # AХПП
                       self.sizes["transitionArea"]*(self.numOfBath-1) + self.sizes["outputArea"])
         for i in range(self.numOfBath):
             curBath = "Ванна №" + str(i + 1)  # текущй ключ к словарю self.size
-            print(curBath)
             self.totalLenght += self.sizes[curBath][1] #прибавляем длинну каждой ванны
         self.sizes.update({"totalLenght" : self.totalLenght})
 
@@ -123,7 +123,6 @@ class Oven():
     # расчет расстояния до стенки печи. Геометрическое решение см. AutoCAD
     # BC расстояние между креплениями, R радиус поворота, GL ширина детали, DG длина детали, ED требуемый запас по расстоянию
     def distSide(self, R, BC, GL, DG, ED):
-        print(R, BC, GL, DG, ED)
         alpha = BC / R * 180 / np.pi
         FBD = np.tan(GL / (DG - BC)) * 90 / np.pi
         ABC = (180 - alpha) / 2
@@ -166,6 +165,18 @@ class Oven():
 
 
     def twoLoop(self, stdrt):
+        '''
+                s -------------------- L ----- Y
+                |                      |
+                IN                     |
+                |       Dryer/Oven     |
+               OUT                     |
+                |                      |
+                W -------------------- f
+                |
+                |
+                X
+                '''
         self.sizes = dict()
         l_straight = (self.L_work - np.pi*float(self.data['Radius']))/2 + stdrt["minEntr"][1] +\
                            (int(self.data['numAir'])*stdrt["airСurtain"][1])
@@ -181,6 +192,14 @@ class Oven():
         self.sizes.update({"width": width})
         # TODO здесь округляю с заданной кратностью. Сделать настройку кратности путем чтения ее из JSON файла
         # Расчет координат входа/выхода относительно start_point
+        inx = stdrt["minWallEntr"][1] + stdrt["thicknessSandwich"][1] + self.unit_whl["w"]/2
+        outx = inx + 2*self.data['Radius']
+        self.sizes.update({"In": Coordinate(inx, 0)})  # in_point
+        self.sizes.update({"Out": Coordinate(outx, 0)})  # out_point
+        return self.sizes
+
+    # 4-ех петелечная. Вход и выход в разных местах
+    def fourLoop(self, stdrt):
         '''
         s -------------------- L ----- Y
         |                      |
@@ -193,14 +212,6 @@ class Oven():
         |
         X
         '''
-        inx = stdrt["minWallEntr"][1] + stdrt["thicknessSandwich"][1] + self.unit_whl["w"]/2
-        outx = inx + 2*self.data['Radius']
-        self.sizes.update({"In": Coordinate(inx, 0)})  # in_point
-        self.sizes.update({"Out": Coordinate(outx, 0)})  # out_point
-        return self.sizes
-
-    # 4-ех петелечная. Вход и выход в разных местах
-    def fourLoop(self, stdrt):
         self.sizes = dict()
 
         l_straight = (self.L_work - 3*np.pi * float(self.data['Radius']) + \
@@ -226,11 +237,22 @@ class Oven():
 
     #с 4 петельками, выход и вход расположены рядом
     def snake(self, stdrt):
+        '''
+        s -------------------- L ----- Y
+       IN                      |
+       OUT                     |
+        |       Dryer/Oven     |
+        |                      |
+        W -------------------- f
+        |
+        |
+        X
+        '''
         self.sizes = dict()
 
-        l_straight = self.L_work - 2 * (stdrt["minEntr"][1] + int(self.data['numAir']) * stdrt["airСurtain"][1])+\
-            4*self.EF + float(self.data['Radius']) - stdrt["minBtwProducts"][1] - \
-                      3 * np.pi * float(self.data['Radius'])
+        l_straight = (self.L_work + 2 * (stdrt["minEntr"][1] + int(self.data['numAir']) * stdrt["airСurtain"][1])+\
+            5*self.EF - float(self.data['Radius']) - stdrt["minBtwProducts"][1] - \
+                      3 * np.pi * float(self.data['Radius']))/4
         totalLenght = l_straight + float(self.data['Radius']) + self.EF
         totalLenght = round(totalLenght * 2 + 499, -3) // 2  # кратно 500
         self.sizes.update({"totalLenght": totalLenght})
@@ -248,7 +270,6 @@ class Oven():
         outx = inx + self.unit_whl["w"] + stdrt["minBtwProducts"][1]
         self.sizes.update({"In": Coordinate(inx, 0)})  # in_point
         self.sizes.update({"Out": Coordinate(outx, 0)})  # out_point
-
         return self.sizes
 
 
@@ -257,12 +278,16 @@ class Equipment():
     def __init__(self, data):
         self.data = data # данные с предыдущего шага
         self.configurations = ["oneLoop","twoLoop", "fourLoop","snake"]
-        self.ahppCalc()
-        self.dryerCalc()
+        self.packages_mm = list()  # сюда буду пихать словари с конфигурациями.
+        self.packages = list()  # сюда буду пихать словари с конфигурациями.
+        self.packagesTransf = list() # конфигурации, переведенные в размеры клеток
+        self.getBlocks()
+
 
     def ahppCalc(self):
         sizes = AHPP.get(self.data)
-        print("АХПП", sizes)
+        name = "АХПП"
+        return name, sizes
 
 
     #генерация 4 списков конфигураций
@@ -270,29 +295,68 @@ class Equipment():
         setDryers = list()
         dryer = Oven(self.data, "Сушка")
         for config in self.configurations:
-            print(config, dryer.get(config))
+            setDryers.append(dryer.get(config))
+        name = "Сушка"
+        return name, setDryers
 
-    def polymerizCalc(self, data):
+    def polymerizCalc(self):
         setOvens = list()
         oven = Oven(self.data, "Полимеризация")
-        return [1, 2, "Печь полимеризации"]
+        for config in self.configurations:
+            setOvens.append(oven.get(config))
+        name = "Полимеризация"
+        return name, setOvens
 
 
-    #функция, которая возвращает словарь
-    def getBlocks(self, data):
-        packages = list() #сюда буду пихать словари с конфигурациями.
-        package = dict()
+    #функция, возвращающая пакеты с размерами фигур в мм
+    def getBlocks_mm(self):
 
-        AHPP.get(data)
-        """
-        package = {
-            1 : AHPP.,
-            2 : self.dryerCalc(data),
-            3 : [],
-            4 : [],
-            5 : [],
-            6 : []
-        }
-        """
-        return 1 #здесь можно организовать через next возврат словарей
+        nA, ahpp = self.ahppCalc()
+        nD, dryers = self.dryerCalc()
+        nO, ovens = self.polymerizCalc()
+        for numD, dryer in enumerate(dryers):
+            for numO, oven in enumerate(ovens):
+                nameDryer = nD + str(numD)
+                nameOven = nO + str(numO)
+                package = {
+                    1 : [ahpp['totalLenght'], ahpp['width'], nA, ahpp["In"], ahpp["Out"], nameDryer],
+                    2 : [dryer['totalLenght'], dryer['width'], nameDryer, dryer["In"], dryer["Out"], "Кабина"],
+                    3 : [11500, 6800, "Кабина", Coordinate(3400, 0), Coordinate(3400, 11500), nameOven],
+                    4 : [oven['totalLenght'], oven['width'], nameOven, oven["In"], oven["Out"], "Зона Разгрузки"],
+                    # TODO зона разгрузки и погрузки может быть объеденена (как в проекте Брендфорд). Спрашивать об этом можно на этапе задания параметров
+                    5 : [5000, 1000, "Зона Разгрузки", Coordinate(500,0), Coordinate(500,5000), "Зона Загрузки"],
+                    6 : [5000, 1000, "Зона Загрузки", Coordinate(500,0), Coordinate(500,5000), nA],
+                }
+                self.packages_mm.append(package)
 
+        # вывод на печать
+        #for p in self.packages_mm:
+         #    print(p)
+
+    ##функция, возвращающая пакеты с размерами фигур в клетках
+    def getBlocks(self):
+        self.getBlocks_mm()
+        self.packages = copy.deepcopy(self.packages_mm) #копирование всех конфигураций с объектами
+        for i, package in enumerate(self.packages):
+            for key in package.keys():
+                for j, elem in enumerate(package[key]):
+                    if not isinstance(elem, str) and not isinstance(elem, Coordinate):
+                        self.packages[i][key][j] = int(round(elem / float(self.data['CellSize'])))
+                    if isinstance(elem, Coordinate):
+                        # здесь я округляю в меньшую сторону. Может случиться проблема при большом размере клетки. Тогда вход и выход будут одной клеткой.
+                        # TODO в будущем подумать над тем, чтобы задать конвейер не одной клеткой, а несколькими клетками.
+                        self.packages[i][key][j] = Coordinate(int(math.floor(elem.x / float(self.data['CellSize']))), int(math.floor(elem.y / float(self.data['CellSize']))))
+
+        #вывод на печать
+        #for p in self.packages:
+        #    print(p)
+
+    def get_area(self):
+        return (self.data['GridWidth'], self.data['GridHeight'])
+
+
+
+    def get_sequences(self):
+        X = [1, 6, 3, 4, 5, 2]
+        Y = [3, 4, 1, 2, 5, 6]
+        return X, Y
