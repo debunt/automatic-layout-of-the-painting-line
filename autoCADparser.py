@@ -14,7 +14,7 @@ class parseDWG:
         self.path2dwg = ""
         self.data = {}
     #TODO переименовать все это дерьмо с show на execute
-    def show(self, data):
+    def execute(self, data):
         self.data = data
         self.acad = Autocad(create_if_not_exists=True)  # so far app is not open
         self.path2dwg = self.data["Строительная подоснова"]# refer to the key to the field where the link to this file

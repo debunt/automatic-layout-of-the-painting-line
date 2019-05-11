@@ -12,7 +12,7 @@ class ParsingXslx:
         self.parsingData = {}
 
 
-    def show(self, data):
+    def execute(self, data):
 
         #if field in previous stage has path to file, lets use that else use template
         if data[1] != "":

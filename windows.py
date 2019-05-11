@@ -85,7 +85,7 @@ class StartWindow(Windows):
         self.command = "Load Project"
         super().root.quit()
 
-    def show(self, data):
+    def execute(self, data):
         super().clearFrame()
         self.root.geometry('{}x{}+{}+{}'.format(self.w, self.h, 0, 0))
         l = Label(self.root, text="Автоматизированное создание\n планировки",
@@ -114,7 +114,7 @@ class LoadProject(Windows):
 
 
 
-    def show(self, data):
+    def execute(self, data):
         super().clearFrame()
         self.root.geometry('{}x{}+{}+{}'.format(self.w, self.h, 0, 0))
         l2 = Label(self.root, text="Загрузка",
@@ -183,7 +183,7 @@ class CreateProject1(Windows):
                 i+=1
 
 #TODO убрать поле
-    def show(self, data):
+    def execute(self, data):
         super().clearFrame()
         self.root.geometry('{}x{}+{}+{}'.format(self.w, self.h, 0, 0))
         ###########################
@@ -248,23 +248,10 @@ class CreateProject2(Windows):
         self.h = 900
         self.command = ""
         self.root.title('CreateProject1')
-        #self.labelCellSize = "" # размер 1 квадратой клетки
-        #self.labelWidthGrid = "" # ширина поля в клетках
-        #self.labelHeightGrid = "" # высота поля в клетках
         self.entriesDict = dict() # словарь полей ввода
         self.labelsDict = dict() # словарь лейблов, которые я буду изменять
         self.checkButDict = dict()
         self.data2algoritm = dict() # данные для алгоритма, которые будут в виде:
-
-    '''wid_hei_dict = {
-        1: [2, 4, '1_АХПП'],
-        2: [1, 3, '2_Печь'],
-        3: [3, 3, '3_Печь_2'],
-        4: [3, 5, '4_Кабина'],
-        5: [3, 2, '5_Зона Загрузки'],
-        6: [5, 3, '6_Зона Выгрузки'],
-    }'''
-
 
 
     def update_data(self):
@@ -321,7 +308,7 @@ class CreateProject2(Windows):
                     BC = 150 #TODO добавить чтение JSON файла данного параметра
                     TP = LD = float(self.entriesDict["Attach_width"].get())
                     DE = (float(self.entriesDict['Длина'].get()) - TP)/2
-                    #R = float(self.entriesDict["Radius"].get()) #TODO починить, радиус в форме задается с помощью radioButtons
+                    R = float(self.entriesDict["Radius"].get()) #TODO починить, радиус в форме задается с помощью radioButtons
                     R = 750
                     print("**")
                 except KeyError: #TODO избавиться от костыля, проверять наличие требуемых переменных из какого нибудь листа
@@ -355,7 +342,7 @@ class CreateProject2(Windows):
 
 
 
-    def show(self, dataFromXslx):
+    def execute(self, dataFromXslx):
         super().clearFrame()
         self.root.geometry('{}x{}+{}+{}'.format(self.w, self.h, 0, 0))
         # TODO сделать итоговый адекватный словарь для передачи его модулю Алгоритма
@@ -516,7 +503,7 @@ class GenerateSolution(Windows):
         self.command = ""
         self.root.title('CreateProject1')
 
-    def show(self, data):
+    def execute(self, data):
         super().clearFrame()
         self.data = data #
         print("Last Window", self.data)

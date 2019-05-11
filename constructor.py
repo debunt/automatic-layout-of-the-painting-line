@@ -52,7 +52,7 @@ class Constructor:
     def start(self):
         command = ""
         while command != "exit": #
-            command = self.exeClass.show(self.currentData) # получаем переданную команду после нажатия кнопки
+            command = self.exeClass.execute(self.currentData) # получаем переданную команду после нажатия кнопки
             self.transferWindow(command) # определяем, какое окно открыть
 
 

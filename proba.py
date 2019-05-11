@@ -1,3 +1,8 @@
+"""
+
+файл нужен для тестирования работы генератора фигур
+"""
+
 
 from calcEquipment import *
 import numpy as np

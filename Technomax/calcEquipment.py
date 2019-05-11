@@ -109,7 +109,7 @@ class Oven():
                                "twoLoop": self.twoLoop,
                                "fourLoop": self.fourLoop,
                                "snake": self.snake}
-        self.path = "Files/standarts.json"  # путь до JSON файла
+        self.path = "../Files/standarts.json"  # путь до JSON файла
         with open(self.path, 'r', encoding="utf-8") as f:
             self.standarts = json.loads(f.read())
         self.EF = self.distSide(R=int(self.data['Radius']), BC=int(self.data['Attach_width']),
@@ -131,6 +131,7 @@ class Oven():
         DB = np.sqrt((((DG - BC) / 2) ** 2 + (GL / 2) ** 2))
         AD = np.sqrt(DB ** 2 + R ** 2 - 2 * DB * R * np.cos(np.deg2rad(DBA)))
         return ED + AD - R  # возвращаю EF
+
 
     def oneLoop(self, stdrt):
         self.sizes = dict()
@@ -281,8 +282,7 @@ class Equipment():
         self.packages_mm = list()  # сюда буду пихать словари с конфигурациями.
         self.packages = list()  # сюда буду пихать словари с конфигурациями.
         self.packagesTransf = list() # конфигурации, переведенные в размеры клеток
-        self.getBlocks()
-
+        self.get_blocks()
 
     def ahppCalc(self):
         sizes = AHPP.get(self.data)
@@ -318,7 +318,7 @@ class Equipment():
             for numO, oven in enumerate(ovens):
                 nameDryer = nD + str(numD)
                 nameOven = nO + str(numO)
-                package = {
+                '''package = {
                     1 : [ahpp['totalLenght'], ahpp['width'], nA, ahpp["In"], ahpp["Out"], nameDryer],
                     2 : [dryer['totalLenght'], dryer['width'], nameDryer, dryer["In"], dryer["Out"], "Кабина"],
                     3 : [11500, 6800, "Кабина", Coordinate(3400, 0), Coordinate(3400, 11500), nameOven],
@@ -326,6 +326,15 @@ class Equipment():
                     # TODO зона разгрузки и погрузки может быть объеденена (как в проекте Брендфорд). Спрашивать об этом можно на этапе задания параметров
                     5 : [5000, 1000, "Зона Разгрузки", Coordinate(500,0), Coordinate(500,5000), "Зона Загрузки"],
                     6 : [5000, 1000, "Зона Загрузки", Coordinate(500,0), Coordinate(500,5000), nA],
+                }'''
+                package = {
+                    1 : [ahpp['totalLenght'], ahpp['width'], nA, Coordinate(0, 0), Coordinate(0, 0), nameDryer],
+                    2 : [dryer['totalLenght'], dryer['width'], nameDryer, Coordinate(0, 0), Coordinate(0, 0), "Кабина"],
+                    3 : [11500, 6800, "Кабина", Coordinate(0, 0), Coordinate(0, 0), nameOven],
+                    4 : [oven['totalLenght'], oven['width'], nameOven, Coordinate(0, 0), Coordinate(0, 0), "Зона Разгрузки"],
+                    # TODO зона разгрузки и погрузки может быть объеденена (как в проекте Брендфорд). Спрашивать об этом можно на этапе задания параметров
+                    5 : [5000, 1000, "Зона Разгрузки", Coordinate(0, 0), Coordinate(0, 0), "Зона Загрузки"],
+                    6 : [5000, 1000, "Зона Загрузки", Coordinate(0, 0), Coordinate(0, 0), nA],
                 }
                 self.packages_mm.append(package)
 
@@ -334,7 +343,7 @@ class Equipment():
          #    print(p)
 
     ##функция, возвращающая пакеты с размерами фигур в клетках
-    def getBlocks(self):
+    def get_blocks(self):
         self.getBlocks_mm()
         self.packages = copy.deepcopy(self.packages_mm) #копирование всех конфигураций с объектами
         for i, package in enumerate(self.packages):
@@ -352,9 +361,7 @@ class Equipment():
         #    print(p)
 
     def get_area(self):
-        return (self.data['GridWidth'], self.data['GridHeight'])
-
-
+        return int(float(self.data['Ширина Размещения']) / float(self.data['CellSize'])), int(float(self.data['Высота Размещения']) / float(self.data['CellSize']))
 
     def get_sequences(self):
         X = [1, 6, 3, 4, 5, 2]
