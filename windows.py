@@ -248,18 +248,31 @@ class CreateProject2(Windows):
         self.h = 900
         self.command = ""
         self.root.title('CreateProject1')
-        self.entriesDict = dict() # словарь полей ввода
-        self.labelsDict = dict() # словарь лейблов, которые я буду изменять
-        self.checkButDict = dict()
+        self.entities = dict() # словарь полей ввода
         self.data2algoritm = dict() # данные для алгоритма, которые будут в виде:
 
+    #проверка, является ли строка числом (целым или с плавающей строчкой)
+    def is_digit(self, string):
+        if string.isdigit():
+            return True
+        else:
+            try:
+                float(string)
+                return True
+            except ValueError:
+                return False
 
     def update_data(self):
-        print(self.data.keys())
-        for key in self.entriesDict.keys():
-            self.data[key] = self.entriesDict[key].get()
-        for key in self.checkButDict.keys():
-            self.data[key] = self.checkButDict[key].get()
+        for key in self.entities.keys():
+            if not isinstance(self.entities[key], Label):
+                elem = self.entities[key].get()
+                if isinstance(self.entities[key], Entry):
+                    if self.is_digit(elem):
+                        self.data[key] = int(float(elem)) #загружаем все цифровые данные из entries
+                    else:
+                        self.data[key] = elem  # загружаем все строковые данные из entries
+                elif not isinstance(self.entities[key], Entry):
+                    self.data[key] = elem  # загружаем все оставшиеся данные (кроме лейблов)
         print(self.data)
 
 
@@ -304,13 +317,11 @@ class CreateProject2(Windows):
             if keyL == "CellSize":
                 try:
                     #загружаем требуемые переменные
-                    AB = CE = float(self.entriesDict["Ширина"].get())/2
+                    AB = CE = float(self.entities["Ширина"].get())/2
                     BC = 150 #TODO добавить чтение JSON файла данного параметра
-                    TP = LD = float(self.entriesDict["Attach_width"].get())
-                    DE = (float(self.entriesDict['Длина'].get()) - TP)/2
-                    R = float(self.entriesDict["Radius"].get()) #TODO починить, радиус в форме задается с помощью radioButtons
-                    R = 750
-                    print("**")
+                    TP = LD = float(self.entities["Attach_width"].get())
+                    DE = (float(self.entities['Длина'].get()) - TP)/2
+                    R = float(self.entities["Radius"].get()) #TODO починить, радиус в форме задается с помощью radioButtons
                 except KeyError: #TODO избавиться от костыля, проверять наличие требуемых переменных из какого нибудь листа
                     self.data[keyL] = 1000
                     continue
@@ -332,25 +343,15 @@ class CreateProject2(Windows):
 
                 self.data[keyL] = round(lamb)
             else:
-                self.data[keyL] = int(float(self.entriesDict[keyE].get()) / self.data["CellSize"])  # расчет ширины и высоты поля в клетках
+                self.data[keyL] = int(float(self.entities[keyE].get()) / self.data["CellSize"])  # расчет ширины и высоты поля в клетках
 
-            self.labelsDict[keyL].configure(text=keyL + ": " + str(self.data[keyL]))
+            self.entities[keyL].configure(text=keyL + ": " + str(self.data[keyL]))
 
         self.update_data()
         #TODO впихнуть сюда генерацию эквипмента
         self.show_grid_canvas()
 
-
-
-    def execute(self, dataFromXslx):
-        super().clearFrame()
-        self.root.geometry('{}x{}+{}+{}'.format(self.w, self.h, 0, 0))
-        # TODO сделать итоговый адекватный словарь для передачи его модулю Алгоритма
-        self.data = dataFromXslx
-        self.entriesDict.clear() #очищаем словарь полей ввода
-        self.labelsDict.clear() #очищаем словарь лейблов
-
-        #зная путь до таблицы, генерируем таюлицу на форме
+    def showTable(self):
         keys = list(self.data.keys())
         for i, key in enumerate(keys):  # Rows
             # TODO убрать отсюда Obstacles сделать разворачивающийся список с координатами препятствий, их ширинами и высотами
@@ -365,24 +366,33 @@ class CreateProject2(Windows):
                 nameLabel = Label(self.root, text=key)
                 nameLabel.grid(row=i, column=0)
 
-
             for j, content in enumerate(self.data[key]):  # Columns
-                if i in [0,5,9] or j == 1:
+                if i in [0, 5, 9] or j == 1:
                     b = Label(self.root, text=str(content))
-                    b.grid(row=i, column=j+1)
+                    b.grid(row=i, column=j + 1)
                 else:
-                    if j == 2 and str(content) == "" and i <= 9: #условие i <=9 чтобы отрисовывать поля для названия операций
+                    if j == 2 and str(
+                            content) == "" and i <= 9:  # условие i <=9 чтобы отрисовывать поля для названия операций
                         continue
                     b = Entry(self.root, text="")
-                    b.bind("<FocusOut>", self.gridEvaluate)
                     b.grid(row=i, column=j + 1, sticky=N)
                     b.insert(0, str(content))
-                    if key in self.entriesDict.keys():
-                        self.entriesDict.update({str(key + " name") : b})  # создаем словарь полей ввода.
+                    if key in self.entities.keys():
+                        self.entities.update({str(key + " name"): b})  # создаем словарь полей ввода.
                     else:
-                        self.entriesDict.update({key : b}) # создаем словарь полей ввода.
+                        self.entities.update({key: b})  # создаем словарь полей ввода.
 
-        # отрисовка результатов расчета Входных данных для алгоритма
+    def execute(self, dataFromXslx):
+        super().clearFrame()
+        self.root.geometry('{}x{}+{}+{}'.format(self.w, self.h, 0, 0))
+        # TODO сделать итоговый адекватный словарь для передачи его модулю Алгоритма
+        self.data = dataFromXslx
+        self.entities.clear() #очищаем словарь полей ввода
+
+
+        #зная путь до таблицы, генерируем таюлицу на форме
+        self.showTable()
+
 
         #Крупный лейбл Параметры сетки
         b = Label(self.root, text="Параметры сетки", font='Helvetica 9 bold')
@@ -392,10 +402,9 @@ class CreateProject2(Windows):
 
         # создаем Поле для ввода ширины футура
         e = Entry(self.root, justify='center', width=7)
-        self.entriesDict.update({"Futur" : e})
+        self.entities.update({"Futur" : e})
         e.grid(row=2, column=4)
         e.insert(0, str("200"))
-        e.bind("<FocusOut>", self.gridEvaluate)
 
         #Вставляем фото сечения FUTUR
         img = ImageTk.PhotoImage(Image.open("Files\Section FUTUR 100.PNG"))
@@ -409,7 +418,7 @@ class CreateProject2(Windows):
             l = Label(self.root)
             l.grid(row=8+i, column=4, sticky=N)
             self.data.update({newKey: 0})
-            self.labelsDict.update({newKey : l})
+            self.entities.update({newKey : l})
         keys = list(self.data.keys())
         print(keys)
         self.gridEvaluate(None) # выполнить первичный расчет
@@ -420,10 +429,9 @@ class CreateProject2(Windows):
 
         # создаем Поле для ввода расстояние крепления
         e = Entry(self.root, justify='center', width=7)
-        self.entriesDict.update({"Attach_width": e})
+        self.entities.update({"Attach_width": e})
         e.grid(row=12, column=4)
         e.insert(0, str("2800"))
-        e.bind("<FocusOut>", self.gridEvaluate)
 
         # Вставляем фото чертежа крепления детали
         img2 = ImageTk.PhotoImage(Image.open("Files/attachment_100.png"))
@@ -437,13 +445,13 @@ class CreateProject2(Windows):
         cvar1 = BooleanVar()
         cvar1.set(0)
         c1 = Checkbutton(text="Электронагрев", variable=cvar1, onvalue=1, offvalue=0)
-        self.checkButDict.update({"Электронагрев" : cvar1})
+        self.entities.update({"Электронагрев" : cvar1})
         c1.grid(row=1, column=5, sticky=W)
 
         cvar2 = BooleanVar()
         cvar2.set(0)
         c1 = Checkbutton(text="Воздушная завеса", variable=cvar2, onvalue=1, offvalue=0)
-        self.checkButDict.update({"Воздушная завеса": cvar2})
+        self.entities.update({"Воздушная завеса": cvar2})
         c1.grid(row=2, column=5, sticky=W)
 
         b = Label(self.root, text="Кол-во завес")
@@ -451,10 +459,9 @@ class CreateProject2(Windows):
 
         # создаем Поле для ввода кол-ва воздушных завес
         e = Entry(self.root, justify='center', width=7)
-        self.entriesDict.update({"numAir": e})
+        self.entities.update({"numAir": e})
         e.grid(row=3, column=5, sticky="E")
         e.insert(0, str("0"))
-        e.bind("<FocusOut>", self.gridEvaluate)
 
         b = Label(self.root, text="Кабина нанесения\nкраски", font='Helvetica 9 bold')
         b.grid(row=4, column=5, rowspan=2)
@@ -469,7 +476,7 @@ class CreateProject2(Windows):
         r2.grid(row=7, column=5, sticky=W)
         r3.grid(row=8, column=5, sticky=W)
         r4.grid(row=9, column=5, sticky=W)
-        self.checkButDict.update({"Кабина покраски": r_var})
+        self.entities.update({"Кабина покраски": r_var})
 
         # Крупный лейбл Остальные параметры
         b = Label(self.root, text="Радиус поворотов", font='Helvetica 9 bold')
@@ -481,10 +488,13 @@ class CreateProject2(Windows):
         r2 = Radiobutton(text='750 мм', variable=radius, value=750)
         r1.grid(row=11, column=5, sticky=W)
         r2.grid(row=12, column=5, sticky=W)
-        self.checkButDict.update({"Radius": radius})
-
-
+        self.entities.update({"Radius": radius})
+        for k in self.entities.keys():
+            if isinstance(self.entities[k], Entry):
+                self.entities[k].bind("<FocusOut>", self.gridEvaluate) #к каждому полю ввода привязываем вектор-функцию
+        self.root.bind('<Motion>', self.gridEvaluate)
         super().defaultButtons(row=18)
+        self.gridEvaluate(None)
 
 
 
