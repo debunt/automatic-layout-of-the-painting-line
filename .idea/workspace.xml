@@ -7,12 +7,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0662e225-8caa-4d73-b908-04814577d02f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Technomax/Sequence_Pair_Testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Technomax/Sequence_Pair_Testing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Technomax/calcEquipment.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Technomax/canvas.py" beforeDir="false" afterPath="$PROJECT_DIR$/canvas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/constructor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows.py" beforeDir="false" afterPath="$PROJECT_DIR$/windows.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Входные_Данные.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Входные_Данные.xlsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,13 +63,13 @@
           <entry key="json" value="592" />
           <entry key="py" value="38836" />
           <entry key="spec" value="1" />
-          <entry key="txt" value="1115" />
+          <entry key="txt" value="1463" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="592" />
-          <entry key="PLAIN_TEXT" value="1116" />
+          <entry key="PLAIN_TEXT" value="1464" />
           <entry key="Python" value="38870" />
         </counts>
       </usages-collector>
@@ -104,7 +98,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/windows.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
+            <state relative-caret-position="375">
               <caret line="546" column="47" selection-start-line="546" selection-start-column="47" selection-end-line="546" selection-end-column="47" />
               <folding>
                 <element signature="e#73#94#0" expanded="true" />
@@ -553,7 +547,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557659556949</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Подключен алгоритм Placement и Routing [https://github.com/VladislavSolovyev/Technomax]. Отрисовка работы алгоритма представлена в последнем окне. Параметр начальной температуры в алгоритме отжига выставлена низкой, чтобы ускорить процесс отладки HMU. Кнопки в последнем окне пока не подключены">
+      <created>1557672701654</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1557672701654</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -567,19 +568,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1096" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10677699" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32948583" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4960191" visible="true" weight="0.2699896" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4960191" weight="0.2699896" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49761146" weight="0.20356768" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.23084995" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.32917964" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49960598" weight="0.21091291" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5047771" side_tool="true" weight="0.22770199" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.33053514" />
@@ -599,7 +599,8 @@
     <MESSAGE value="класс Equipment реализован. Содержит поля - пакеты, состоящие из 16 конфигураций фигур в мм и в клетках." />
     <MESSAGE value="имя вызываемой функции show изменена на execute" />
     <MESSAGE value="словарь с данными data после формы с вводом данных теперь содержит типизированные данные" />
-    <option name="LAST_COMMIT_MESSAGE" value="словарь с данными data после формы с вводом данных теперь содержит типизированные данные" />
+    <MESSAGE value="Подключен алгоритм Placement и Routing [https://github.com/VladislavSolovyev/Technomax]. Отрисовка работы алгоритма представлена в последнем окне. Параметр начальной температуры в алгоритме отжига выставлена низкой, чтобы ускорить процесс отладки HMU. Кнопки в последнем окне пока не подключены" />
+    <option name="LAST_COMMIT_MESSAGE" value="Подключен алгоритм Placement и Routing [https://github.com/VladislavSolovyev/Technomax]. Отрисовка работы алгоритма представлена в последнем окне. Параметр начальной температуры в алгоритме отжига выставлена низкой, чтобы ускорить процесс отладки HMU. Кнопки в последнем окне пока не подключены" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/envatcd/Lib/site-packages/comtypes/client/dynamic.py">
@@ -823,7 +824,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/windows.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
+        <state relative-caret-position="375">
           <caret line="546" column="47" selection-start-line="546" selection-start-column="47" selection-end-line="546" selection-end-column="47" />
           <folding>
             <element signature="e#73#94#0" expanded="true" />
