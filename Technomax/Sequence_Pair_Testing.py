@@ -1,6 +1,5 @@
 from Technomax.Placement_Routing import *
 #from Technomax import Brandford_1
-from Technomax.canvas import Draw
 import random
 import math
 import copy
@@ -402,43 +401,53 @@ wid_hei_dict = {
 }
 
 '''
-from Technomax.calcEquipment import Equipment
 
-data = {'Имя параметра': ['Значение', 'СИ', ''], 'Ширина Размещения': '100000.0', 'Высота Размещения': '100000.0', 'Скорость конвейера': '3.0', 'Шаг цепи': '200.0', 'Размеры детали': ['', '', ''], 'Длина': '3800.0', 'Ширина': '700.0', 'Высота': '1800.0', 'Рекомендации Химиков': ['', '', 'Название Операции'], 'Ванна №1': '150.0', 'Ванна №2': '60.0', 'Ванна №3': '60.0', 'Ванна №4': '', 'Ванна №5': '', 'Ванна №6': '', 'Сушка': '11.0', 'Полимеризация': '21.0', 'Строительная подоснова': '', 'Чертеж кабины': '', 'Obstacles': {}, 'CellSize': 1542.0, 'GridWidth': 35, 'GridHeight': 9, 'Ванна №1 name': 'Обезжиривание', 'Ванна №2 name': 'Промывка', 'Ванна №3 name': 'Промывка деми', 'Ванна №4 name': '', 'Ванна №5 name': '', 'Ванна №6 name': '', 'Сушка name': '', 'Полимеризация name': '', 'Futur': '200', 'Attach_width': '2800', 'numAir': '0', 'Электронагрев': False, 'Воздушная завеса': False, 'Кабина покраски': 'Q-MAX', 'Radius': 500}
-eq = Equipment(data)
 
-ar = eq.get_area()
-print(ar)
-area = Area(ar[0], ar[1])
-area.draw_map()
 
-wid_hei_dict = eq.packages[12]
-print(wid_hei_dict)
 
-X, Y = eq.get_sequences()
 
-init_seq_pair = SeqPair(X, Y, wid_hei_dict, delta=2)
-print('Initial cost:', SimAnnealing.get_cost(init_seq_pair, area))
 
-annealed_seq_pair = SimAnnealing(40, 0.1)
-res_of_simulation = annealed_seq_pair.sim_annealing(init_seq_pair, area)
-final_SP = res_of_simulation
 
-print('Simulation succeed!')
-'''
-a = res_of_simulation[0]
-figures = res_of_simulation[1]
-'''
-
-work_shop = TransformSeqPair.to_passabilities(final_SP, area)
-a = work_shop[0]
-figures = work_shop[1]
-
-Draw.window(ar, figures, a)
-# Draw.window_2(ar, figures)
-
+from calcEquipment import Equipment
 
 class Algorithm():
     #data - данные с предыдущего этапа
-    def __init__(self, data):
+    def __init__(self):
         pass
+
+    def execute(self, data):
+        self.data = data
+        eq = Equipment(data)
+        ar = eq.get_area()
+        area = Area(ar[0], ar[1])
+        area.draw_map()
+
+        wid_hei_dict = eq.packages[12]
+        print(wid_hei_dict)
+
+        X, Y = eq.get_sequences()
+
+        init_seq_pair = SeqPair(X, Y, wid_hei_dict, delta=2)
+        print('Initial cost:', SimAnnealing.get_cost(init_seq_pair, area))
+
+        annealed_seq_pair = SimAnnealing(40, 0.1)
+        res_of_simulation = annealed_seq_pair.sim_annealing(init_seq_pair, area)
+        final_SP = res_of_simulation
+
+        print('Simulation succeed!')
+        '''
+        a = res_of_simulation[0]
+        figures = res_of_simulation[1]
+        '''
+
+        work_shop = TransformSeqPair.to_passabilities(final_SP, area)
+        a = work_shop[0] #матрица после работы алгоритма routing
+        figures = work_shop[1] #выбранный словарь для отрисовки
+
+        self.data.update({"Routing" : a})
+        self.data.update({"Figures": figures})
+
+        return "next"
+
+    def get(self):
+        return self.data

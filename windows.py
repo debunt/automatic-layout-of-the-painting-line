@@ -21,8 +21,10 @@ class Windows():
     def __init__(self):
 
         #координаты расположения окна
-        position_x = self.root.winfo_screenwidth() // 2 // 2  # ширина экрана
-        position_y = self.root.winfo_screenheight() // 2 // 2  # высота экрана
+        self.screen_width = self.root.winfo_screenwidth()
+        self.screen_height = self.root.winfo_screenheight()
+        position_x = self.screen_width // 2 // 2  # ширина экрана
+        position_y = self.screen_height // 2 // 2  # высота экрана
         self.w = 700
         self.h = 440
         self.root.geometry('{}x{}+{}+{}'.format(self.w, self.h, position_x, position_y))
@@ -310,7 +312,7 @@ class CreateProject2(Windows):
 
 
     # calculation of grid size. Расчет см. в docx файле
-    def gridEvaluate(self, event):
+    def gridEvaluate(self, event=None):
 
         for keyE, keyL in zip(["Ширина","Ширина Размещения","Высота Размещения"],["CellSize", "GridWidth", "GridHeight"]):
 
@@ -356,7 +358,7 @@ class CreateProject2(Windows):
         for i, key in enumerate(keys):  # Rows
             # TODO убрать отсюда Obstacles сделать разворачивающийся список с координатами препятствий, их ширинами и высотами
             if key in ["Obstacles", "Строительная подоснова",
-                       "Чертеж кабины", "Grid"]:
+                       "Чертеж кабины", "Grid", "Figures", "Routing"]:
                 continue
             if i in [0, 5, 9]:
                 nameLabel = Label(self.root, text=key, font='Helvetica 9 bold')
@@ -365,8 +367,9 @@ class CreateProject2(Windows):
             else:
                 nameLabel = Label(self.root, text=key)
                 nameLabel.grid(row=i, column=0)
+            print(key, self.data[key])
 
-            for j, content in enumerate(self.data[key]):  # Columns
+            for j, content in enumerate(self.data[key] if isinstance(self.data[key], list) else [self.data[key]]):  # Columns
                 if i in [0, 5, 9] or j == 1:
                     b = Label(self.root, text=str(content))
                     b.grid(row=i, column=j + 1)
@@ -444,13 +447,13 @@ class CreateProject2(Windows):
 
         cvar1 = BooleanVar()
         cvar1.set(0)
-        c1 = Checkbutton(text="Электронагрев", variable=cvar1, onvalue=1, offvalue=0)
+        c1 = Checkbutton(text="Электронагрев", variable=cvar1, onvalue=1, offvalue=0, command=self.gridEvaluate)
         self.entities.update({"Электронагрев" : cvar1})
         c1.grid(row=1, column=5, sticky=W)
 
         cvar2 = BooleanVar()
         cvar2.set(0)
-        c1 = Checkbutton(text="Воздушная завеса", variable=cvar2, onvalue=1, offvalue=0)
+        c1 = Checkbutton(text="Воздушная завеса", variable=cvar2, onvalue=1, offvalue=0, command=self.gridEvaluate)
         self.entities.update({"Воздушная завеса": cvar2})
         c1.grid(row=2, column=5, sticky=W)
 
@@ -468,10 +471,10 @@ class CreateProject2(Windows):
 
         r_var = StringVar()
         r_var.set("Q-MAX")
-        r1 = Radiobutton(text='Серия ТМХ', variable=r_var, value="Серия ТМХ")
-        r2 = Radiobutton(text='Q-MAX', variable=r_var, value="Q-MAX")
-        r3 = Radiobutton(text='Wagner', variable=r_var, value="Wagner")
-        r4 = Radiobutton(text='ColorMax', variable=r_var, value="ColorMax")
+        r1 = Radiobutton(text='Серия ТМХ', variable=r_var, value="Серия ТМХ", command=self.gridEvaluate)
+        r2 = Radiobutton(text='Q-MAX', variable=r_var, value="Q-MAX", command=self.gridEvaluate)
+        r3 = Radiobutton(text='Wagner', variable=r_var, value="Wagner", command=self.gridEvaluate)
+        r4 = Radiobutton(text='ColorMax', variable=r_var, value="ColorMax", command=self.gridEvaluate)
         r1.grid(row=6, column=5, sticky=W)
         r2.grid(row=7, column=5, sticky=W)
         r3.grid(row=8, column=5, sticky=W)
@@ -484,15 +487,15 @@ class CreateProject2(Windows):
 
         radius = IntVar()
         radius.set(500)
-        r1 = Radiobutton(text='500 мм', variable=radius, value=500)
-        r2 = Radiobutton(text='750 мм', variable=radius, value=750)
+        r1 = Radiobutton(text='500 мм', variable=radius, value=500, command=self.gridEvaluate)
+        r2 = Radiobutton(text='750 мм', variable=radius, value=750, command=self.gridEvaluate)
         r1.grid(row=11, column=5, sticky=W)
         r2.grid(row=12, column=5, sticky=W)
         self.entities.update({"Radius": radius})
         for k in self.entities.keys():
             if isinstance(self.entities[k], Entry):
                 self.entities[k].bind("<FocusOut>", self.gridEvaluate) #к каждому полю ввода привязываем вектор-функцию
-        self.root.bind('<Motion>', self.gridEvaluate)
+        #self.root.bind('<Motion>', self.gridEvaluate)
         super().defaultButtons(row=18)
         self.gridEvaluate(None)
 
@@ -501,6 +504,7 @@ class CreateProject2(Windows):
         return self.startloop()
 
 
+from canvas import Draw
 #это окно будет отрисовывать окно с полученнрй планировкой, а также будут кнопки для отрисовки данного алгоритма в
 # AutoCAD, NX
 class GenerateSolution(Windows):
@@ -516,16 +520,33 @@ class GenerateSolution(Windows):
     def execute(self, data):
         super().clearFrame()
         self.data = data #
-        print("Last Window", self.data)
-        #Equipment.getBlocks(data)
-        eq = Equipment(data)
-
-        Label(self.root, text="GenerateSolution",
-              font="Arial 12", bd=20).place(anchor=W, relx=0.05, rely=0.05)
-
+        print("Last Window", self.data["Routing"])
+        print(" ")
+        print(self.data["Figures"])
+        f_top = LabelFrame()
+        f_top.pack()
+        l = Label(self.root, text="GenerateSolution", font="Arial 12")
+        l.pack()
+        f_med = LabelFrame(text="Карта решения")
+        f_med.pack()
+        self.root.geometry('{}x{}+{}+{}'.format(self.screen_width, self.screen_height, 0, 0))
+        Draw.window(self.data, self.root, self.screen_width, self.screen_height)
+        f_bot = LabelFrame(text="ffs")
+        f_bot.pack()
         b5 = Button(self.root, text="Новый проект3", command=super().nextButton,
-               width=15, height=3, font="Arial 12", bg='#D0F0C0').place(anchor=CENTER, relx=0.3, rely=0.3)
+               width=15, height=3, font="Arial 12", bg='#D0F0C0')
+        b5.pack(side=LEFT)
 
         b6 = Button(self.root, text="Загрузить проект3", command=super().backButton,
-               width=15, height=3, font="Arial 12", bg='#FFD1DC').place(anchor=CENTER, relx=0.7, rely=0.3)
+               width=15, height=3, font="Arial 12", bg='#FFD1DC')
+        b6.pack(side=LEFT)
+        b7 = Button(self.root, text="AutoCAD", command=super().nextButton,
+                    width=15, height=3, font="Arial 12", bg='#D0F0C0')
+        b7.pack(side=RIGHT)
+
+        b8 = Button(self.root, text="Siemens NX", command=super().backButton,
+                    width=15, height=3, font="Arial 12", bg='#FFD1DC')
+        b8.pack(side=RIGHT)
+
+        #super().defaultButtons()
         return self.startloop()

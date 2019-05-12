@@ -5,18 +5,26 @@ from tkinter import *
 class Draw():
 
     @staticmethod
-    def window(ar, figures, area):
+    def window(data, root, screen_width, screen_height):
         colors = ['#4aa755', "#c3cd4e", "#f5cb22", "#f2672c", "#e22f74", "#90509b", "#0846e4", "#00968d",
                   "#ededed"]
 
-        root = Tk()
-        #width_canvas = max([f.finish_point.y for f in figures]) + 1
-        #height_canvas = max([f.finish_point.x for f in figures]) + 1
-        width_canvas = ar[0]
-        height_canvas = ar[1]
+        figures = data["Figures"]
+        area = data["Routing"]
+        height_canvas = screen_height - 100
+        occupied_width_canvas = max([f.finish_point.y for f in figures]) + 3
+        occupied_height_canvas = max([f.finish_point.x for f in figures]) + 3
+        max_width_grid = data["GridWidth"]
+        max_height_grid = data["GridHeight"]
 
-        koef = 25 # был 25
-        c = Canvas(root, width=width_canvas*koef, height=height_canvas*koef, bg='white')
+        area_efficiency = occupied_width_canvas * occupied_height_canvas / (max_width_grid * max_height_grid)
+
+        koef_x = int(screen_width / occupied_width_canvas)
+        koef_y = int(height_canvas / occupied_height_canvas)
+        koef = min (koef_x, koef_y)
+        width_canvas = occupied_width_canvas*koef
+        height_canvas = occupied_height_canvas*koef
+        c = Canvas(root, width=width_canvas, height=height_canvas, bg='white')
         c.pack()
 
         #рисую сетку
@@ -48,7 +56,6 @@ class Draw():
             for i in ind:
                 c.create_rectangle(i * koef, row * koef,(i + 1) * koef, (row + 1) * koef, fill="#463E3F", width=3)
         c.pack()
-        root.mainloop()
 
     @staticmethod
     def window_2(ar, figures):
