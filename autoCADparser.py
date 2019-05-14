@@ -13,7 +13,6 @@ class parseDWG:
     def __init__(self):
         self.path2dwg = ""
         self.data = {}
-    #TODO переименовать все это дерьмо с show на execute
     def execute(self, data):
         self.data = data
         self.acad = Autocad(create_if_not_exists=True)  # so far app is not open

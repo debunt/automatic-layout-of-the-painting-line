@@ -125,6 +125,8 @@ class SeqPair:
 
 
 class TransformSeqPair:
+    def __init__(self):
+        pass
 
     @staticmethod
     def to_passabilities(seq_pair, area):
@@ -152,7 +154,8 @@ class TransformSeqPair:
 
         sum_length = 0
         num_of_conveyors_added = 0
-
+        conveyors = []
+        del conveyors[:]
         for i in range(len(figures)):
             a = area.figure_adding(figures[i])
         for figure in figures:
@@ -163,13 +166,14 @@ class TransformSeqPair:
                 #print(tmp)
                 if now_figure.name == tmp:
                     coordinate_to = now_figure.out_point
-            a = area.conveyor_adding(figure.in_point, coordinate_to)
+            a, conveyor = area.conveyor_adding(figure.in_point, coordinate_to)
+            conveyors.append(conveyor)
             buf = area.conveyor_adding(figure.in_point, coordinate_to, only_path_len=True)
             if buf != 0:
                 sum_length += buf
                 num_of_conveyors_added += 1
 
-        return a, figures, num_of_conveyors_added, sum_length
+        return a, figures, num_of_conveyors_added, sum_length, conveyors
 
 
 class SimAnnealing:
@@ -444,8 +448,11 @@ class Algorithm():
         a = work_shop[0] #матрица после работы алгоритма routing
         figures = work_shop[1] #выбранный словарь для отрисовки
 
+        conveyors = work_shop[4]
+
         self.data.update({"Routing" : a})
         self.data.update({"Figures": figures})
+        self.data.update({"Conveyors" : conveyors})
 
         return "next"
 

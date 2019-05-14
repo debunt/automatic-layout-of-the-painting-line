@@ -40,7 +40,7 @@ class Constructor:
             self.parsedwg : {"next" : [self.createProject2, self.parsedwg]}, # TODO надо, чтобы парсинг dwg добавил еще элемент в список с координатами препятствий, размерами площади
             self.createProject2 : {"next": [self.algorithm, self.createProject2], "back": [self.createProject1, self.createProject1]},
             self.algorithm : {"next" : [self.generateSolution, self.algorithm]},
-            self.generateSolution : {"AutoCAD": [0,[]], "Process Simulate": [0,[]], "back" : [self.createProject2, self.createProject2]}
+            self.generateSolution : {"autocad": [0,[]], "nx": [0,[]], "back" : [self.createProject2, self.createProject2]}
         }
 
 

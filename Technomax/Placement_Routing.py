@@ -91,6 +91,7 @@ class Area:
         #for i in range(len(path)):
             #print(path[i], end=' ')
         # Добавление происходит поэлементной проходкой по Area
+        copy_path = path.copy()
         if path:
             for _ in range(len(path)):
                 buf = path.pop()
@@ -99,7 +100,7 @@ class Area:
             #print('Path does not exist')
 
         # print(list_of_walls)
-        return self.passabilities
+        return self.passabilities, copy_path
 
 
 def coordinates_checker(start_point, finish_point):

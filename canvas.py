@@ -11,9 +11,17 @@ class Draw():
 
         figures = data["Figures"]
         area = data["Routing"]
-        height_canvas = screen_height - 100
-        occupied_width_canvas = max([f.finish_point.y for f in figures]) + 3
-        occupied_height_canvas = max([f.finish_point.x for f in figures]) + 3
+        height_canvas = screen_height - 150
+
+        #запись в один лист координаты конвейеров. Далее планируется выделение максимально удаленной точки по Х и по Y осям
+        allCoordinates = list()
+        for conveyor in data["Conveyors"]:
+            allCoordinates.extend(conveyor)
+
+        #поиск максимально удаленной точки среди конвейеров и среди фигур
+        occupied_width_canvas = max(max(map(lambda coord: coord.y, allCoordinates)), max([f.finish_point.y for f in figures])) + 1
+        occupied_height_canvas = max(max(map(lambda coord: coord.x, allCoordinates)), max([f.finish_point.x for f in figures])) + 1
+
         max_width_grid = data["GridWidth"]
         max_height_grid = data["GridHeight"]
 
@@ -47,14 +55,11 @@ class Draw():
             c.create_text((f.start_point.y + (f.finish_point.y - f.start_point.y + 1)/2)*koef,
                           (f.start_point.x + (f.finish_point.x - f.start_point.x + 1) / 2)*koef,
                           text=f.name, font="Verdana 10")
-        indicies = []
-        for line in area:
-            indicies.append([ind for ind, n in enumerate(line) if n == -2])
 
-        # закрашиваем путь
-        for row, ind in enumerate(indicies):
-            for i in ind:
-                c.create_rectangle(i * koef, row * koef,(i + 1) * koef, (row + 1) * koef, fill="#463E3F", width=3)
+        for i, conveyor in enumerate(data["Conveyors"]):
+            for coord in conveyor:
+                c.create_rectangle(coord.y*koef, coord.x*koef, (coord.y+1)*koef, (coord.x+1)*koef, fill="#463E3F", width=3)
+                c.create_text((coord.y + 0.5)*koef, (coord.x + 0.5)*koef, text=str(i), font="Verdana 10", fill="white")
         c.pack()
 
     @staticmethod

@@ -516,6 +516,14 @@ class GenerateSolution(Windows):
         #self.frame = Frame(self.root)
         self.command = ""
         self.root.title('CreateProject1')
+        self.autoCad_logo = PhotoImage(file="Files/Autocad logo 100.png")
+        self.nx_logo = PhotoImage(file="Files/nx logo 277 100.png")
+
+    def autoCadCallback(self):
+        return "autocad"
+
+    def nxCallback(self):
+        return "nx"
 
     def execute(self, data):
         super().clearFrame()
@@ -533,19 +541,16 @@ class GenerateSolution(Windows):
         Draw.window(self.data, self.root, self.screen_width, self.screen_height)
         f_bot = LabelFrame(text="ffs")
         f_bot.pack()
-        b5 = Button(self.root, text="Новый проект3", command=super().nextButton,
-               width=15, height=3, font="Arial 12", bg='#D0F0C0')
-        b5.pack(side=LEFT)
 
-        b6 = Button(self.root, text="Загрузить проект3", command=super().backButton,
+        b6 = Button(self.root, text="Назад", command=super().backButton,
                width=15, height=3, font="Arial 12", bg='#FFD1DC')
         b6.pack(side=LEFT)
-        b7 = Button(self.root, text="AutoCAD", command=super().nextButton,
-                    width=15, height=3, font="Arial 12", bg='#D0F0C0')
+        b7 = Button(self.root, command=self.autoCadCallback,
+                    width=100, height=100, image=self.autoCad_logo)
         b7.pack(side=RIGHT)
 
-        b8 = Button(self.root, text="Siemens NX", command=super().backButton,
-                    width=15, height=3, font="Arial 12", bg='#FFD1DC')
+        b8 = Button(self.root, text="Siemens NX", command=self.nxCallback,
+                    width=277, height=100, image=self.nx_logo)
         b8.pack(side=RIGHT)
 
         #super().defaultButtons()
