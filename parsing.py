@@ -18,7 +18,7 @@ class ParsingXslx:
         if data[1] != "":
             path2File = data[1]
         else:
-            path2File = "Files/templateInputData.xlsx"
+            path2File = "Входные_Данные.xlsx"
 
         reader = xlrd.open_workbook(path2File).sheet_by_name("Лист1")
         self.parsingData = {}

@@ -520,7 +520,8 @@ class GenerateSolution(Windows):
         self.nx_logo = PhotoImage(file="Files/nx logo 277 100.png")
 
     def autoCadCallback(self):
-        return "autocad"
+        self.command = "autocad"
+        self.root.quit()
 
     def nxCallback(self):
         return "nx"
@@ -528,9 +529,6 @@ class GenerateSolution(Windows):
     def execute(self, data):
         super().clearFrame()
         self.data = data #
-        print("Last Window", self.data["Routing"])
-        print(" ")
-        print(self.data["Figures"])
         f_top = LabelFrame()
         f_top.pack()
         l = Label(self.root, text="GenerateSolution", font="Arial 12")
@@ -538,7 +536,8 @@ class GenerateSolution(Windows):
         f_med = LabelFrame(text="Карта решения")
         f_med.pack()
         self.root.geometry('{}x{}+{}+{}'.format(self.screen_width, self.screen_height, 0, 0))
-        Draw.window(self.data, self.root, self.screen_width, self.screen_height)
+        frame = Draw.window(self.data, self.root, self.screen_width, self.screen_height)
+        self.data.update({"occupiedFrame" : frame}) #обновляю данные, поместив туда размеры под расстановку, [width, height]
         f_bot = LabelFrame(text="ffs")
         f_bot.pack()
 

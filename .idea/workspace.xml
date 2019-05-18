@@ -6,14 +6,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0662e225-8caa-4d73-b908-04814577d02f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Files/Autocad logo 100.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Files/nx logo 277 100.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Files/templates.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/autoCADdrawer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Technomax/Placement_Routing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Technomax/Placement_Routing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Technomax/Sequence_Pair_Testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Technomax/Sequence_Pair_Testing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autoCADparser.py" beforeDir="false" afterPath="$PROJECT_DIR$/autoCADparser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/canvas.py" beforeDir="false" afterPath="$PROJECT_DIR$/canvas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/constructor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parsing.py" beforeDir="false" afterPath="$PROJECT_DIR$/parsing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/windows.py" beforeDir="false" afterPath="$PROJECT_DIR$/windows.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,16 +21,38 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/Technomax/Placement_Routing.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="320">
+                    <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="22" />
+                    <folding>
+                      <element signature="e#0#13#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FUSProjectUsageTrigger">
     <session id="411722469">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="44" />
+          <entry key="project.closed" value="45" />
           <entry key="project.open.time.1" value="9" />
           <entry key="project.open.time.10" value="4" />
-          <entry key="project.open.time.11" value="3" />
+          <entry key="project.open.time.11" value="4" />
           <entry key="project.open.time.12" value="2" />
-          <entry key="project.open.time.13" value="3" />
+          <entry key="project.open.time.13" value="4" />
           <entry key="project.open.time.14" value="3" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.2" value="3" />
@@ -40,45 +61,45 @@
           <entry key="project.open.time.6" value="2" />
           <entry key="project.open.time.7" value="5" />
           <entry key="project.open.time.8" value="6" />
-          <entry key="project.open.time.9" value="8" />
-          <entry key="project.opened" value="52" />
+          <entry key="project.open.time.9" value="9" />
+          <entry key="project.opened" value="55" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="121" value="4" />
           <entry key="PNG" value="4" />
-          <entry key="ipynb" value="7" />
-          <entry key="json" value="1" />
+          <entry key="ipynb" value="8" />
+          <entry key="json" value="3" />
           <entry key="kv" value="1" />
           <entry key="png" value="1" />
-          <entry key="py" value="126" />
+          <entry key="py" value="137" />
           <entry key="spec" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="IPNB" value="7" />
+          <entry key="IPNB" value="8" />
           <entry key="Image" value="5" />
-          <entry key="JSON" value="1" />
+          <entry key="JSON" value="3" />
           <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="126" />
+          <entry key="Python" value="137" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="34" />
-          <entry key="json" value="592" />
-          <entry key="py" value="39953" />
+          <entry key="json" value="884" />
+          <entry key="py" value="44218" />
           <entry key="spec" value="1" />
-          <entry key="txt" value="1463" />
+          <entry key="txt" value="1699" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JSON" value="592" />
-          <entry key="PLAIN_TEXT" value="1464" />
-          <entry key="Python" value="39987" />
+          <entry key="JSON" value="884" />
+          <entry key="PLAIN_TEXT" value="1700" />
+          <entry key="Python" value="44252" />
         </counts>
       </usages-collector>
     </session>
@@ -86,10 +107,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Files/standarts.json">
+        <entry file="file://$PROJECT_DIR$/Files/templates.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="620">
-              <caret line="31" column="6" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
+            <state relative-caret-position="60">
+              <caret line="3" column="37" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -97,17 +118,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/calcEquipment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+            <state relative-caret-position="6600">
+              <caret line="334" selection-start-line="334" selection-end-line="334" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/parsing.py">
+        <entry file="file://$PROJECT_DIR$/windows.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="21" />
+            <state relative-caret-position="329">
+              <caret line="538" column="24" selection-start-line="538" selection-start-column="24" selection-end-line="538" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -115,8 +139,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/constructor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="769">
-              <caret line="42" column="59" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
+            <state relative-caret-position="2">
+              <caret line="23" column="34" lean-forward="true" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
               <folding>
                 <element signature="e#45#66#0" expanded="true" />
               </folding>
@@ -124,23 +148,41 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/autoCADparser.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/parsing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+            <state relative-caret-position="380">
+              <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/autoCADdrawer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="269">
+              <caret line="118" column="29" selection-start-line="118" selection-start-column="29" selection-end-line="118" selection-end-column="29" />
               <folding>
-                <element signature="e#0#37#0" expanded="true" />
+                <element signature="e#0#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Technomax/Sequence_Pair_Testing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-222">
-              <caret line="157" column="24" selection-start-line="157" selection-start-column="24" selection-end-line="157" selection-end-column="24" />
+            <state relative-caret-position="29">
+              <caret line="157" column="24" lean-forward="true" selection-start-line="157" selection-start-column="24" selection-end-line="157" selection-end-column="24" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -149,31 +191,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Technomax/Routing_A_Star.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Technomax/Placement_Routing.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="101" column="30" selection-start-line="101" selection-start-column="30" selection-end-line="101" selection-end-column="30" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/canvas.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="61" column="110" selection-start-line="61" selection-start-column="110" selection-end-line="61" selection-end-column="110" />
+            <state relative-caret-position="380">
+              <caret line="49" column="44" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -190,14 +211,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>contentFields</find>
-      <find>def get</find>
-      <find>defaultButtons</find>
-      <find>Ванн</find>
-      <find>ванн</find>
-      <find>tk</find>
-      <find>self.labelWidthGrid</find>
-      <find>standarts</find>
       <find>pi</find>
       <find>data</find>
       <find>EF</find>
@@ -217,9 +230,17 @@
       <find>conveyor_adding</find>
       <find>TransformSeqPair:</find>
       <find>TransformSeqPair</find>
-      <find>to_passabilities</find>
       <find>conve</find>
+      <find>Shape</find>
       <find>adding</find>
+      <find>1,</find>
+      <find>labe</find>
+      <find>Figure</find>
+      <find>json</find>
+      <find>scale</find>
+      <find>to_passabilities</find>
+      <find>Coordinate</find>
+      <find>@</find>
     </findStrings>
     <replaceStrings>
       <replace>base_point, sizes, phi)</replace>
@@ -255,7 +276,6 @@
         <option value="$PROJECT_DIR$/windows/createProject1.py" />
         <option value="$PROJECT_DIR$/windows/loadProject.py" />
         <option value="$PROJECT_DIR$/windows/windows.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/Sequence_Pair_Testing.py" />
         <option value="$PROJECT_DIR$/autocad/main.py" />
         <option value="$PROJECT_DIR$/commomClasses.py" />
@@ -263,26 +283,28 @@
         <option value="$PROJECT_DIR$/windows/GUI.py" />
         <option value="$PROJECT_DIR$/windows/canvas.py" />
         <option value="$PROJECT_DIR$/Files/CalculCleaningLine.py" />
-        <option value="$PROJECT_DIR$/Files/standarts.json" />
         <option value="$PROJECT_DIR$/Routing_A_Star.py" />
         <option value="$PROJECT_DIR$/calcEquipment.py" />
         <option value="$PROJECT_DIR$/Technomax/calcEquipment.py" />
         <option value="$PROJECT_DIR$/proba.py" />
-        <option value="$PROJECT_DIR$/parsing.py" />
-        <option value="$PROJECT_DIR$/constructor.py" />
-        <option value="$PROJECT_DIR$/windows.py" />
         <option value="$PROJECT_DIR$/Technomax/Routing_A_Star.py" />
         <option value="$PROJECT_DIR$/Technomax/Placement_Routing.py" />
-        <option value="$PROJECT_DIR$/Technomax/Sequence_Pair_Testing.py" />
-        <option value="$PROJECT_DIR$/canvas.py" />
+        <option value="$PROJECT_DIR$/Files/standarts.json" />
         <option value="$PROJECT_DIR$/autoCADparser.py" />
+        <option value="$PROJECT_DIR$/parsing.py" />
+        <option value="$PROJECT_DIR$/windows.py" />
+        <option value="$PROJECT_DIR$/Files/templates.json" />
+        <option value="$PROJECT_DIR$/constructor.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/autoCADdrawer.py" />
+        <option value="$PROJECT_DIR$/canvas.py" />
+        <option value="$PROJECT_DIR$/Technomax/Sequence_Pair_Testing.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="902" />
-    <option name="y" value="-26" />
-    <option name="width" value="1294" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1188" />
+    <option name="width" value="1379" />
     <option name="height" value="1087" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -352,15 +374,15 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\YandexDisk\#SKOLTECH\Early Research Tecnomax\pythonScript\Files" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\YandexDisk\#SKOLTECH\Early Research Tecnomax\pythonScript\Files" />
       <recent name="D:\YandexDisk\#SKOLTECH\Early Research Tecnomax\pythonScript" />
       <recent name="D:\YandexDisk\#SKOLTECH\Early Research Tecnomax\pythonScript\Technomax" />
       <recent name="D:\YandexDisk\#SKOLTECH\Early Research Tecnomax\pythonScript\windows" />
       <recent name="D:\YandexDisk\#SKOLTECH\Early Research Tecnomax\pythonScript\autocad" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\YandexDisk\#SKOLTECH\Early Research Tecnomax\pythonScript\Files" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -418,6 +440,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="autoCADdrawer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pythonScript" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/autoCADdrawer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="pythonScript" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -431,27 +474,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="pythonScript" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="D:\YandexDisk\#SKOLTECH\Early Research Tecnomax\pythonScript\autocad\main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -482,19 +504,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.main" />
       <item itemvalue="Python.main (1)" />
       <item itemvalue="Python.proba" />
       <item itemvalue="Python.Sequence_Pair_Testing (1)" />
       <item itemvalue="Python.Placement_Routing" />
+      <item itemvalue="Python.autoCADdrawer" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.autoCADdrawer" />
         <item itemvalue="Python.Sequence_Pair_Testing (1)" />
         <item itemvalue="Python.proba" />
         <item itemvalue="Python.Placement_Routing" />
-        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -593,7 +615,14 @@
       <option name="project" value="LOCAL" />
       <updated>1557672729893</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Добавлен в алгоритм формирователь списка списков, содержищие координаты каждого конвейера. Тем самым позволяя упростить последовательную отрисовку конвейеров на поле/чертеже. Добавлены лейблы к кнопкам">
+      <created>1557873039427</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1557873039427</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -606,20 +635,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1096" extended-state="6" />
+    <frame x="1188" y="0" width="1379" height="1087" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.115445234" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.10835303" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32948583" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4960191" visible="true" weight="0.26687434" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49761146" weight="0.20353064" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.08939709" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4960191" visible="true" weight="0.31899264" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49761146" weight="0.20251836" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.23084995" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.26272067" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.12172088" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49960598" weight="0.21091291" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5047771" side_tool="true" weight="0.22770199" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.33053514" />
@@ -628,17 +657,17 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24914384" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.115445234" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.10835303" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32948583" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4960191" visible="true" weight="0.26687434" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49761146" weight="0.20356768" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4960191" weight="0.3191268" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49761146" weight="0.20251836" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.23084995" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.05345912" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.26091477" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49960598" weight="0.21091291" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5047771" side_tool="true" weight="0.22770199" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.33053514" />
@@ -669,31 +698,10 @@
     <MESSAGE value="имя вызываемой функции show изменена на execute" />
     <MESSAGE value="словарь с данными data после формы с вводом данных теперь содержит типизированные данные" />
     <MESSAGE value="Подключен алгоритм Placement и Routing [https://github.com/VladislavSolovyev/Technomax]. Отрисовка работы алгоритма представлена в последнем окне. Параметр начальной температуры в алгоритме отжига выставлена низкой, чтобы ускорить процесс отладки HMU. Кнопки в последнем окне пока не подключены" />
-    <option name="LAST_COMMIT_MESSAGE" value="Подключен алгоритм Placement и Routing [https://github.com/VladislavSolovyev/Technomax]. Отрисовка работы алгоритма представлена в последнем окне. Параметр начальной температуры в алгоритме отжига выставлена низкой, чтобы ускорить процесс отладки HMU. Кнопки в последнем окне пока не подключены" />
+    <MESSAGE value="Добавлен в алгоритм формирователь списка списков, содержищие координаты каждого конвейера. Тем самым позволяя упростить последовательную отрисовку конвейеров на поле/чертеже. Добавлены лейблы к кнопкам" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлен в алгоритм формирователь списка списков, содержищие координаты каждого конвейера. Тем самым позволяя упростить последовательную отрисовку конвейеров на поле/чертеже. Добавлены лейблы к кнопкам" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/envatcd/Lib/site-packages/comtypes/client/dynamic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/envatcd/Lib/site-packages/comtypes/automation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="729" selection-start-line="729" selection-end-line="729" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proba1.py" />
-    <entry file="file://$PROJECT_DIR$/envatcd/Lib/site-packages/pyautocad/types.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/envatcd/Lib/site-packages/comtypes/client/lazybind.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
@@ -770,13 +778,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Files/CalculCleaningLine.py" />
-    <entry file="file://$PROJECT_DIR$/Files/Справка Autocad.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proba.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -808,92 +809,127 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Files/standarts.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
+        <state relative-caret-position="615">
           <caret line="31" column="6" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/parsing.py">
+    <entry file="file://$PROJECT_DIR$/autoCADparser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="21" />
+        <state relative-caret-position="280">
+          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/envatcd/Lib/site-packages/comtypes/automation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="728" selection-start-line="728" selection-end-line="728" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Files/Справка Autocad.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Technomax/Routing_A_Star.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="-160">
+          <caret line="34" column="26" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Technomax/Placement_Routing.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/json/decoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="101" column="30" selection-start-line="101" selection-start-column="30" selection-end-line="101" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="430">
+          <caret line="352" selection-start-line="352" selection-end-line="352" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Technomax/Sequence_Pair_Testing.py">
+    <entry file="file://$PROJECT_DIR$/Files/templates.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-222">
-          <caret line="157" column="24" selection-start-line="157" selection-start-column="24" selection-end-line="157" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/canvas.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="61" column="110" selection-start-line="61" selection-start-column="110" selection-end-line="61" selection-end-column="110" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/windows.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="540" column="16" selection-start-line="540" selection-start-column="16" selection-end-line="540" selection-end-column="16" />
-          <folding>
-            <element signature="e#73#94#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="3" column="37" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/calcEquipment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+        <state relative-caret-position="6600">
+          <caret line="334" selection-start-line="334" selection-end-line="334" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" selection-start-line="6" selection-end-line="11" />
+        <state relative-caret-position="220">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/constructor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="769">
-          <caret line="42" column="59" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
+        <state relative-caret-position="2">
+          <caret line="23" column="34" lean-forward="true" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
           <folding>
             <element signature="e#45#66#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/autoCADparser.py">
+    <entry file="file://$PROJECT_DIR$/Technomax/Placement_Routing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+        <state relative-caret-position="320">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="22" />
           <folding>
-            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/windows.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="538" column="24" selection-start-line="538" selection-start-column="24" selection-end-line="538" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/canvas.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="49" column="44" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/autoCADdrawer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="118" column="29" selection-start-line="118" selection-start-column="29" selection-end-line="118" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parsing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Technomax/Sequence_Pair_Testing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="157" column="24" lean-forward="true" selection-start-line="157" selection-start-column="24" selection-end-line="157" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>

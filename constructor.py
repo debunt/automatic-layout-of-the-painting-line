@@ -3,6 +3,7 @@
 from windows import *
 from parsing import *
 from autoCADparser import parseDWG
+from autoCADdrawer import drawDWG
 from Technomax.Sequence_Pair_Testing import Algorithm
 import copy
 
@@ -24,6 +25,7 @@ class Constructor:
         self.createProject2 = CreateProject2()
         self.generateSolution = GenerateSolution()
         self.algorithm = Algorithm()
+        self.drawdwg = drawDWG()
 
 
         self.exeClass = self.startWindow  #текущее открытое окно приложения, второе поле списка содержит данные
@@ -40,7 +42,9 @@ class Constructor:
             self.parsedwg : {"next" : [self.createProject2, self.parsedwg]}, # TODO надо, чтобы парсинг dwg добавил еще элемент в список с координатами препятствий, размерами площади
             self.createProject2 : {"next": [self.algorithm, self.createProject2], "back": [self.createProject1, self.createProject1]},
             self.algorithm : {"next" : [self.generateSolution, self.algorithm]},
-            self.generateSolution : {"autocad": [0,[]], "nx": [0,[]], "back" : [self.createProject2, self.createProject2]}
+            self.generateSolution : {"autocad": [self.drawdwg, self.generateSolution], "nx": [0,[]], "back" : [self.createProject2, self.createProject2]},
+            self.drawdwg : {"next" : [self.generateSolution, self.drawdwg]}
+
         }
 
 
