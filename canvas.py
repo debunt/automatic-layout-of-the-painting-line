@@ -44,9 +44,9 @@ class Draw():
             c.create_text(0.5 * koef, (y + 0.5) * koef, text=y, font="Verdana 10")
 
         for i, conveyor in enumerate(data["Conveyors"]):
-            for coord in conveyor[0]:
+            for j, coord in enumerate(conveyor[0]):
                 c.create_rectangle(coord.y*koef, coord.x*koef, (coord.y+1)*koef, (coord.x+1)*koef, fill="#463E3F", width=3)
-                c.create_text((coord.y + 0.5)*koef, (coord.x + 0.5)*koef, text=str(i), font="Verdana 10", fill="white")
+                c.create_text((coord.y + 0.5)*koef, (coord.x + 0.5)*koef, text=str(i) if j else "O", font="Verdana 10", fill="white")
             print(i, conveyor[1], conveyor[2])
         #рисуем фигуры
         for i, f in enumerate(figures):
