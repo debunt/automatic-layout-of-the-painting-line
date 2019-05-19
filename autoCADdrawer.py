@@ -14,8 +14,132 @@ class Shape:
     def __init__(self, path):
         self.points = dict()
 
+class Cells:
+
+    #scale- это уже окончательный масштаб с учетом масштаба чертежа
+    #radius - тоже окончательный размер радиуса
+    def __init__(self, scale, radius):
+        self.scale = scale
+        self.radius = radius
+        self.cells = dict()
+        self._prepareDict()
+
+    def getCell(self, code, glob_coord):
+        print(code)
+
+        return [elem for elem in map(self.cells[code], [glob_coord])][0]
+
+    # генерация блоков-конструкторов для отрисовки конвейера
+    def _prepareDict(self):
+        self.cells.update({"0101": self._horiz})
+        self.cells.update({"0-10-1": self._horiz})
+        self.cells.update({"-10-10": self._vertic})
+        self.cells.update({"1010": self._vertic})
+
+        self.mode = "turn"  # режим отрисовки клеток с поворотом - поворот с радиусом
+        if self.radius > self.scale / 2:
+            self.mode = "line"  # режим отрисовки клеток с поворотом - линия
+            # TODO сейчас я веду линию посередине клетки. при R > lambda/2 необходимо реализовать сдвиг
+    # 1 квадрант
+        self.cells.update({"-100-1": self._quadrant1})
+        self.cells.update({"0110": self._quadrant1})
+    # 2 квадрант
+        self.cells.update({"0-110": self._quadrant2})
+        self.cells.update({"-1001": self._quadrant2})
+    # 3 квадрант
+        self.cells.update({"1001": self._quadrant3})
+        self.cells.update({"0-1-10": self._quadrant3})
+    # 4 квадрант
+        self.cells.update({"01-10": self._quadrant4})
+        self.cells.update({"100-1": self._quadrant4})
+
+    # гориз линия
+    def _horiz(self, global_Cord):
+        p1 = Coordinate(self.scale / 2, 0)
+        p2 = Coordinate(self.scale / 2, self.scale)
+        x = global_Cord.x * self.scale
+        y = global_Cord.y * self.scale
+        return [["line", p1.x + x, p1.y + y, p2.x + x, p2.y + y]]
+
+    # вертик линия
+    def _vertic(self, global_Cord):
+        p1 = Coordinate(0, self.scale / 2)
+        p2 = Coordinate(self.scale, self.scale / 2)
+        x = global_Cord.x * self.scale
+        y = global_Cord.y * self.scale
+        return [["line", p1.x + x, p1.y + y, p2.x + x, p2.y + y]]
+
+    # https://en.wikipedia.org/wiki/Quadrant_(plane_geometry)
+
+    def _quadrant1(self, global_Cord):
+        r = self.radius
+        p1 = Coordinate(self.scale, self.scale / 2)  # TODO необязательно линия должна идти от середины
+        p1_1 = Coordinate(p1.x / 2 + r, p1.y)
+        p2 = Coordinate(self.scale / 2, 0)
+        p2_2 = Coordinate(p2.x, self.scale / 2 - r)
+        x = global_Cord.x * self.scale
+        y = global_Cord.y * self.scale
+        if self.mode == "line": return ["line", p1.x + x, p1.y + y, p2.x + x, p2.y + y]  # TODO фигово. Сделать нормально
+        pR = Coordinate(p2_2.y, p1_1.x)
+        return [["line", p1.x + x, p1.y + y, p1_1.x + x, p1_1.y + y], \
+               ["line", p2.x + x, p2.y + y, p2_2.x + x, p2_2.y + y], \
+               ["arc", APoint(pR.x + x, pR.y + y), r, 0, math.pi / 2]]
+        # ----- 1                 полилиния--2 полилиния--данные для дуги--
+        # построение дуги в автокад https://knowledge.autodesk.com/search-result/caas/CloudHelp/cloudhelp/2016/ENU/AutoCAD-ActiveX/files/GUID-864A7E1F-D221-4C83-A4DB-F60C8E56FED6-htm.html
+
+    def _quadrant2(self, global_Cord):
+        r = self.radius
+        p1 = Coordinate(self.scale, self.scale / 2)
+        p1_1 = Coordinate(self.scale / 2 + r, self.scale / 2)
+        p2 = Coordinate(self.scale / 2, self.scale)
+        p2_2 = Coordinate(self.scale / 2, self.scale / 2 + r)
+        x = global_Cord.x * self.scale
+        y = global_Cord.y * self.scale
+        if self.mode == "line": return ["line", p1.x + x, p1.y + y, p2.x + x, p2.y + y]
+        pR = Coordinate(p1_1.x, p2_2.y)
+        return [["line", p1.x + x, p1.y + y, p1_1.x + x, p1_1.y + y], \
+               ["line", p2.x + x, p2.y + y, p2_2.x + x, p2_2.y + y], \
+               ["arc", APoint(pR.x + x, pR.y + y), r, 0, math.pi / 2]]
+        # -----1 полилиния--2 полилиния--данные для дуги--
+        # построение дуги в автокад https://knowledge.autodesk.com/search-result/caas/CloudHelp/cloudhelp/2016/ENU/AutoCAD-ActiveX/files/GUID-864A7E1F-D221-4C83-A4DB-F60C8E56FED6-htm.html
+
+    def _quadrant3(self, global_Cord):
+        r = self.radius
+        p1 = Coordinate(0, self.scale / 2)
+        p1_1 = Coordinate(self.scale / 2 - r, self.scale / 2)
+        p2 = Coordinate(self.scale / 2, self.scale)
+        p2_2 = Coordinate(self.scale / 2, self.scale / 2 + r)
+        x = global_Cord.x * self.scale
+        y = global_Cord.y * self.scale
+        if self.mode == "line": return ["line", p1.x + x, p1.y + y, p2.x + x, p2.y + y]
+        pR = Coordinate(p1_1.x, p2_2.y)
+        return [["line", p1.x + x, p1.y + y, p1_1.x + x, p1_1.y + y], \
+               ["line", p2.x + x, p2.y + y, p2_2.x + x, p2_2.y + y], \
+               ["arc", APoint(pR.x + x, pR.y + y), r, 0, math.pi / 2]]
+        # -----1 полилиния--2 полилиния--данные для дуги--
+        # построение дуги в автокад https://knowledge.autodesk.com/search-result/caas/CloudHelp/cloudhelp/2016/ENU/AutoCAD-ActiveX/files/GUID-864A7E1F-D221-4C83-A4DB-F60C8E56FED6-htm.html
+
+    def _quadrant4(self, global_Cord):
+        r = self.radius
+        p1 = Coordinate(0, self.scale / 2)
+        p1_1 = Coordinate(self.scale / 2 - r, self.scale / 2)
+        p2 = Coordinate(self.scale / 2, 0)
+        p2_2 = Coordinate(self.scale / 2, self.scale / 2 - r)
+        x = global_Cord.x * self.scale
+        y = global_Cord.y * self.scale
+        if self.mode == "line": return ["line", p1.x + x, p1.y + y, p2.x + x, p2.y + y]
+        pR = Coordinate(p1_1.x, p2_2.y)
+        return [["line", p1.x + x, p1.y + y, p1_1.x + x, p1_1.y + y], \
+               ["line", p2.x + x, p2.y + y, p2_2.x + x, p2_2.y + y], \
+               ["arc",APoint(pR.x + x, pR.y + y), r, 0, math.pi / 2]]
+        # -----1 полилиния--2 полилиния--данные для дуги--
+        # построение дуги в автокад https://knowledge.autodesk.com/search-result/caas/CloudHelp/cloudhelp/2016/ENU/AutoCAD-ActiveX/files/GUID-864A7E1F-D221-4C83-A4DB-F60C8E56FED6-htm.html
+
+
 
 class drawDWG:
+    
+
     def __init__(self):
         self.path2dwg = ""
         self.data = {}
@@ -25,8 +149,8 @@ class drawDWG:
         self.scale = self._getScale()#scale содержит гостовский масштаб
         self.scaledCellSize = self.scale * self.data["CellSize"]
 
-        self.cells = self._getCells() # содержит блоки-конструктор для отрисовки конвейера
-        print("cells", self.cells)
+        self.cells = Cells(self.scaledCellSize, self.data["Radius"] * self.scale) # содержит блоки-конструктор для отрисовки конвейера
+
         self.acad = Autocad(create_if_not_exists=True)  # so far app is not open
         self.pathQmax = "D:\YandexDisk\#SKOLTECH\Early Research Tecnomax\pythonScript\Files\AutoCAD_cabines\Q-MAX.dwg"
         # TODO create windows attention about that in that time autocad will be opening
@@ -50,92 +174,7 @@ class drawDWG:
         x = input()
         return "next"
 
-    #генерация блоков-конструкторов для отрисовки конвейера
-    def _getCells(self):
-
-        #гориз линия
-        def horiz(cell):
-            p1 = Coordinate(cell / 2, 0)
-            p2 = Coordinate(cell / 2, cell)
-            return ["line", p1.x, p1.y, p2.x, p2.y]
-
-        # вертик линия
-        def vertic(cell):
-            p1 = Coordinate(0, cell / 2)
-            p2 = Coordinate(cell, cell / 2)
-            return ["line", p1.x, p1.y, p2.x,p2.y]
-
-        #https://en.wikipedia.org/wiki/Quadrant_(plane_geometry)
-
-        def quadrant1(cell, r, mode):
-            p1 = Coordinate(cell, cell / 2) # TODO необязательно линия должна идти от середины
-            p1_1 = Coordinate(p1.x/2 + r, p1.y)
-            p2 = Coordinate(cell / 2, 0)
-            p2_2 = Coordinate(p2.x, cell / 2 - r)
-            if mode == "line": return ["line", p1.x,p1.y, p2.x, p2.y] #TODO фигово. Сделать нормально
-            pR = Coordinate(p2_2.y, p1_1.x)
-            return ["line", p1.x,p1.y, p1_1.x, p1_1.y], ["line", p2.x, p2.y, p2_2.x, p2_2.y], ["arc", APoint(pR.x, pR.y), r, 0, math.pi/2]
-            #----- 1                 полилиния--2 полилиния--данные для дуги--
-            # построение дуги в автокад https://knowledge.autodesk.com/search-result/caas/CloudHelp/cloudhelp/2016/ENU/AutoCAD-ActiveX/files/GUID-864A7E1F-D221-4C83-A4DB-F60C8E56FED6-htm.html
-
-        def quadrant2(cell, r, mode):
-            p1 = Coordinate(cell, cell / 2)
-            p1_1 = Coordinate(cell/2+r, cell / 2)
-            p2 = Coordinate(cell / 2, cell)
-            p2_2 = Coordinate(cell / 2, cell/2+r)
-            if mode == "line": return ["line", p1.x,p1.y, p2.x, p2.y]
-            pR = Coordinate(p1_1.x, p2_2.y)
-            return ["line", p1.x,p1.y, p1_1.x, p1_1.y], ["line", p2.x, p2.y, p2_2.x, p2_2.y], ["arc", APoint(pR.x, pR.y), r, 0, math.pi/2]
-            #-----1 полилиния--2 полилиния--данные для дуги--
-            # построение дуги в автокад https://knowledge.autodesk.com/search-result/caas/CloudHelp/cloudhelp/2016/ENU/AutoCAD-ActiveX/files/GUID-864A7E1F-D221-4C83-A4DB-F60C8E56FED6-htm.html
-
-        def quadrant3(cell, r, mode):
-            p1 = Coordinate(0, cell / 2)
-            p1_1 = Coordinate(cell/2-r, cell / 2)
-            p2 = Coordinate(cell / 2, cell)
-            p2_2 = Coordinate(cell / 2, cell/2+r)
-            if mode == "line": return ["line", p1.x,p1.y, p2.x, p2.y]
-            pR = Coordinate(p1_1.x, p2_2.y)
-            return ["line", p1.x,p1.y, p1_1.x, p1_1.y], ["line", p2.x, p2.y, p2_2.x, p2_2.y], ["arc",APoint(pR.x, pR.y), r, 0, math.pi/2]
-            #-----1 полилиния--2 полилиния--данные для дуги--
-            # построение дуги в автокад https://knowledge.autodesk.com/search-result/caas/CloudHelp/cloudhelp/2016/ENU/AutoCAD-ActiveX/files/GUID-864A7E1F-D221-4C83-A4DB-F60C8E56FED6-htm.html
-
-        def quadrant4(cell, r, mode):
-            p1 = Coordinate(0, cell / 2)
-            p1_1 = Coordinate(cell/2-r, cell / 2)
-            p2 = Coordinate(cell / 2, 0)
-            p2_2 = Coordinate(cell / 2, cell/2-r)
-            if mode == "line": return ["line", p1.x,p1.y, p2.x, p2.y]
-            pR = Coordinate(p1_1.x, p2_2.y)
-            return ["line", p1.x,p1.y, p1_1.x, p1_1.y], ["line", p2.x, p2.y, p2_2.x, p2_2.y], ["arc",  APoint(pR.x, pR.y), r, 0, math.pi/2]
-            #-----1 полилиния--2 полилиния--данные для дуги--
-            # построение дуги в автокад https://knowledge.autodesk.com/search-result/caas/CloudHelp/cloudhelp/2016/ENU/AutoCAD-ActiveX/files/GUID-864A7E1F-D221-4C83-A4DB-F60C8E56FED6-htm.html
-
-
-        cells = dict()
-        cells.update({"0101" : horiz(self.scaledCellSize)})
-        cells.update({"0-1-1": horiz(self.scaledCellSize)})
-        cells.update({"-10-1": vertic(self.scaledCellSize)})
-        cells.update({"1010": vertic(self.scaledCellSize)})
-
-        radius = self.data["Radius"] * self.scale #расчет отмасштабированного радиуса
-        self.mode = "turn" #режим отрисовки клеток с поворотом - поворот с радиусом
-        if radius > self.scaledCellSize / 2:
-            self.mode = "line" #режим отрисовки клеток с поворотом - линия
-            #TODO сейчас я веду линию посередине клетки. при R > lambda/2 необходимо реализовать сдвиг
-        #1 квадрант
-        cells.update({"-100-1" : [quadrant1, [self.scaledCellSize, radius, self.mode]]})
-        cells.update({"0110" : [quadrant1, [self.scaledCellSize, radius, self.mode]]})
-        # 2 квадрант
-        cells.update({"0-110": [quadrant2, [self.scaledCellSize, radius, self.mode]]})
-        cells.update({"-1001": [quadrant2, [self.scaledCellSize, radius, self.mode]]})
-        # 3 квадрант
-        cells.update({"1001": [quadrant3, [self.scaledCellSize, radius, self.mode]]})
-        cells.update({"0-1-10": [quadrant3, [self.scaledCellSize, radius, self.mode]]})
-        # 4 квадрант
-        cells.update({"01-10": [quadrant4, [self.scaledCellSize, radius, self.mode]]})
-        cells.update({"100-1": [quadrant4, [self.scaledCellSize, radius, self.mode]]})
-        return cells
+   
 
 
     # функция для оппределения scale фактора для чертежа. Задача: поместить полученную расстановку в заданый формат
@@ -244,12 +283,15 @@ class drawDWG:
 
         # в этом цикле для каждой клетки конвейера получаем код
         for conv in self.data["Conveyors"]:
-            self.coded_conveyor = list()
-            self.coded_conveyor.clear()
+            #self.coded_conveyor = list()
+            #self.coded_conveyor.clear()
             conveyor = self._getFinConv(conv)
+
+            #разбиваем конвейер на клеточки
             for i in range(len(conveyor)):
-                self.coded_conveyor.append([self._getCode([conveyor[i-2],conveyor[i-1],conveyor[i]]), [conveyor[i-1].x * self.scaledCellSize, conveyor[i-1].y * self.scaledCellSize]])
-            self.coded_conveyors.append(self.coded_conveyor)
+                self.coded_conveyors.append([self._getCode([conveyor[i-2],conveyor[i-1],conveyor[i]]), conveyor[i-1]])
+            #self.coded_conveyors.append(self.coded_conveyor)
+            print("*")
         """
         for l in self.coded_conveyors:
             for c in l:
@@ -260,23 +302,20 @@ class drawDWG:
         """
 
         #TODO сделать в первую очередь преобразование локальных координат в глобальные
-        for conv in self.coded_conveyors:
-            for cell in conv:
-                try:
-                    local_cell = self.cells[cell[0]]
+        for cell in self.coded_conveyors:
 
-                    for elem in local_cell if isinstance(local_cell[0], list) else [local_cell]:
-                        if elem[0] == "line":
-                            global_cell = list()
-                            global_cell.clear()
-                            for i in [1,2,3,4]:
-                                global_cell.append(elem[i] + cell[1][(i+1)%2])
-                            self.acad.model.AddLightWeightPolyline(array.array("d", global_cell))
+            try:
+                cell_draw = self.cells.getCell(cell[0], cell[1]) #TODO передавать список
 
-                        elif elem[0] == "arc":
-                            self.acad.model.AddCircle(APoint(elem[1].x + cell[1][0],elem[1].y + cell[1][1]), elem[2])
-                except KeyError:
-                    continue
+                for elem in cell_draw: #if isinstance(cell_draw[0], list) else [cell_draw]:
+                    if elem[0] == "line":
+                        self.acad.model.AddLightWeightPolyline(array.array("d", elem[1:]))
+
+                    elif elem[0] == "arc":
+                        self.acad.model.AddCircle(elem[1], elem[2])
+            except KeyError:
+                continue
+            print("**")
 
 
 
