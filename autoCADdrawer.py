@@ -14,6 +14,22 @@ class Shape:
     def __init__(self, path):
         self.points = dict()
 
+def change_coord_system(func):
+    def wrapped(*args, **kwargs):
+        temp = func(*args, **kwargs)
+        changed_elems = list()
+        for elem in temp:  # if isinstance(cell_draw[0], list) else [cell_draw]:
+            if elem[0] == "line":
+                changed_elems.append(["line", elem[2], -elem[1], elem[4], -elem[3]])
+            elif elem[0] == "arc":
+                pR = list(elem[1])
+                print(pR, elem[2])
+                changed_elems.append(["arc", APoint(pR[1], -pR[0]), elem[2]])
+        print(temp)
+        print(changed_elems)
+        return changed_elems
+    return wrapped
+
 class Cells:
 
     #scale- это уже окончательный масштаб с учетом масштаба чертежа
@@ -24,12 +40,16 @@ class Cells:
         self.cells = dict()
         self._prepareDict()
 
+    @change_coord_system
     def getCell(self, code, glob_coord):
         print(code)
 
         return [elem for elem in map(self.cells[code], [glob_coord])][0]
 
+
+
     # генерация блоков-конструкторов для отрисовки конвейера
+
     def _prepareDict(self):
         self.cells.update({"0101": self._horiz})
         self.cells.update({"0-10-1": self._horiz})
