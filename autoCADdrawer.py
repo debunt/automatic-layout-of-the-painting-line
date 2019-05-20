@@ -23,7 +23,7 @@ def change_coord_system(func):
                 changed_elems.append(["line", elem[2], -elem[1], elem[4], -elem[3]])
             elif elem[0] == "arc":
                 pR = list(elem[1])
-                changed_elems.append(["arc", APoint(pR[1], -pR[0]), elem[2]])
+                changed_elems.append(["arc", APoint(pR[1], -pR[0]), elem[2], elem[3], elem[4]])
         print("Было", temp)
         print("стало", changed_elems)
         return changed_elems
@@ -119,7 +119,7 @@ class Cells:
         pR = Coordinate(p1_1.x, p2_2.y)
         return [["line", p1.x + x, p1.y + y, p1_1.x + x, p1_1.y + y], \
                 ["line", p2.x + x, p2.y + y, p2_2.x + x, p2_2.y + y], \
-                ["arc", APoint(pR.x + x, pR.y + y), r, 0, math.pi / 2]]
+                ["arc", APoint(pR.x + x, pR.y + y), r, math.pi / 2, math.pi]]
         # -----1 полилиния--2 полилиния--данные для дуги--
         # построение дуги в автокад https://knowledge.autodesk.com/search-result/caas/CloudHelp/cloudhelp/2016/ENU/AutoCAD-ActiveX/files/GUID-864A7E1F-D221-4C83-A4DB-F60C8E56FED6-htm.html
 
@@ -135,7 +135,7 @@ class Cells:
         pR = Coordinate(p1_1.x, p2_2.y)
         return [["line", p1.x + x, p1.y + y, p1_1.x + x, p1_1.y + y], \
                 ["line", p2.x + x, p2.y + y, p2_2.x + x, p2_2.y + y], \
-                ["arc", APoint(pR.x + x, pR.y + y), r, 0, math.pi / 2]]
+                ["arc", APoint(pR.x + x, pR.y + y), r, math.pi, math.pi * 3/ 2]]
         # -----1 полилиния--2 полилиния--данные для дуги--
         # построение дуги в автокад https://knowledge.autodesk.com/search-result/caas/CloudHelp/cloudhelp/2016/ENU/AutoCAD-ActiveX/files/GUID-864A7E1F-D221-4C83-A4DB-F60C8E56FED6-htm.html
 
@@ -151,7 +151,7 @@ class Cells:
         pR = Coordinate(p1_1.x, p2_2.y)
         return [["line", p1.x + x, p1.y + y, p1_1.x + x, p1_1.y + y], \
                 ["line", p2.x + x, p2.y + y, p2_2.x + x, p2_2.y + y], \
-                ["arc", APoint(pR.x + x, pR.y + y), r, 0, math.pi / 2]]
+                ["arc", APoint(pR.x + x, pR.y + y), r, math.pi * 3/2, math.pi * 2]]
         # -----1 полилиния--2 полилиния--данные для дуги--
         # построение дуги в автокад https://knowledge.autodesk.com/search-result/caas/CloudHelp/cloudhelp/2016/ENU/AutoCAD-ActiveX/files/GUID-864A7E1F-D221-4C83-A4DB-F60C8E56FED6-htm.html
 
@@ -303,23 +303,12 @@ class drawDWG:
 
         # в этом цикле для каждой клетки конвейера получаем код
         for conv in self.data["Conveyors"]:
-            #self.coded_conveyor = list()
-            #self.coded_conveyor.clear()
             conveyor = self._getFinConv(conv)
 
             #разбиваем конвейер на клеточки
-            for i in range(len(conveyor)):
+            for i in range(2, len(conveyor)):
                 self.coded_conveyors.append([self._getCode([conveyor[i-2],conveyor[i-1],conveyor[i]]), conveyor[i-1]])
-            #self.coded_conveyors.append(self.coded_conveyor)
-            print("*")
-        """
-        for l in self.coded_conveyors:
-            for c in l:
-                if len(c) != 0:
-                    print(c)
-                    print("code", c[0], "x=",c[1].x, "y=", c[1].y)
-                    
-        """
+
 
         #TODO сделать в первую очередь преобразование локальных координат в глобальные
         for cell in self.coded_conveyors:
@@ -330,11 +319,9 @@ class drawDWG:
                 for elem in cell_draw: #if isinstance(cell_draw[0], list) else [cell_draw]:
                     if elem[0] == "line":
                         self.acad.model.AddLightWeightPolyline(array.array("d", elem[1:]))
-                        #self.acad.model.AddText(cell[0], APoint(elem[1], elem[2]), 2.5)
 
                     elif elem[0] == "arc":
-                        self.acad.model.AddCircle(elem[1], elem[2])
-                        #self.acad.model.AddText(cell[0], elem[1], 2.5)
+                        self.acad.model.AddArc(elem[1], elem[2], elem[3], elem[4])
             except KeyError:
                 continue
             print("**")
