@@ -42,8 +42,8 @@ class Constructor:
             self.parsedwg : {"next" : [self.createProject2, self.parsedwg]}, # TODO надо, чтобы парсинг dwg добавил еще элемент в список с координатами препятствий, размерами площади
             self.createProject2 : {"next": [self.algorithm, self.createProject2], "back": [self.createProject1, self.createProject1]},
             self.algorithm : {"next" : [self.generateSolution, self.algorithm]},
-            self.generateSolution : {"autocad": [self.drawdwg, self.generateSolution], "nx": [0,[]], "back" : [self.createProject2, self.createProject2]},
-            self.drawdwg : {"next" : [self.generateSolution, self.drawdwg]}
+            self.generateSolution : {"autocad": [self.drawdwg, self.generateSolution], "nx": [0,[]], "back" : [self.createProject2, self.createProject2], "update" : [self.algorithm, self.createProject2]},
+            self.drawdwg : {"done" : [self.generateSolution, self.algorithm]}
 
         }
 
@@ -60,6 +60,7 @@ class Constructor:
         command = ""
         while command != "exit": #
             command = self.exeClass.execute(self.currentData) # получаем переданную команду после нажатия кнопки
+            print(command)
             self.transferWindow(command) # определяем, какое окно открыть
 
 

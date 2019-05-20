@@ -24,8 +24,6 @@ def change_coord_system(func):
             elif elem[0] == "arc":
                 pR = list(elem[1])
                 changed_elems.append(["arc", APoint(pR[1], -pR[0]), elem[2], elem[3], elem[4]])
-        print("Было", temp)
-        print("стало", changed_elems)
         return changed_elems
     return wrapped
 
@@ -42,7 +40,6 @@ class Cells:
     #применение декоратора, который изменяет систему координат. finally (x = y, y = -x)
     @change_coord_system
     def getCell(self, code, glob_coord):
-        print(code)
         return [elem for elem in map(self.cells[code], [glob_coord])][0]
 
 
@@ -162,6 +159,26 @@ class drawDWG:
     def __init__(self):
         self.path2dwg = ""
         self.data = {}
+        path = "Files/templates.json"  # путь до JSON файла
+        self.templates = self._getTemplates(path)
+
+
+    def _getTemplates(self, path):
+        with open(path, 'r', encoding="utf-8") as f:
+            templates = json.loads(f.read())
+            return templates
+
+    def _defineLayers(self):
+        layers = dict()
+        for key in self.templates["Layers"].keys():
+            newLayer = self.acad.doc.Layers.Add(key)  # добавить новый слой
+            newLayer.Color = self.templates["Layers"][key]["color"]  # смена цвета выбранного слоя. Все цвета описаны здесь: http://help.autodesk.com/view/ACD/2016/ENU/?guid=GUID-D08F9A8E-5551-4473-A270-D95F7F32F51A
+            layers.update({key : newLayer})
+        return layers
+
+
+    def _activate_layer(self, name_layer):
+        self.acad.doc.ActiveLayer = self.layers[name_layer]# выбор текущего слоя
 
     def execute(self, data):
         self.data = data
@@ -169,8 +186,8 @@ class drawDWG:
         self.scaledCellSize = self.scale * self.data["CellSize"]
 
         self.cells = Cells(self.scaledCellSize, self.data["Radius"] * self.scale) # содержит блоки-конструктор для отрисовки конвейера
-
-        self.acad = Autocad(create_if_not_exists=True)  # so far app is not open
+        self.acad = Autocad(create_if_not_exists=True)  # so far app is not openw
+        self.layers = self._defineLayers()
         self.pathQmax = "D:\YandexDisk\#SKOLTECH\Early Research Tecnomax\pythonScript\Files\AutoCAD_cabines\Q-MAX.dwg"
         # TODO create windows attention about that in that time autocad will be opening
         #self.acad.Application.Documents.open(self.pathQmax)
@@ -190,8 +207,8 @@ class drawDWG:
         self._scaleFigures()
         self._figuresDraw()
 
-        x = input()
-        return "next"
+        x = input() #ошибка возникает дальше при вызове канваса
+        return "done"
 
    
 
@@ -202,10 +219,6 @@ class drawDWG:
     def _getScale(self):
         index = self.data["occupiedFrame"].index(max(self.data["occupiedFrame"]))#если 0, то ширина расстановки самая большая сторона, иначе высота
         key = ["width", "height"]
-        path = "Files/templates.json"  # путь до JSON файла
-
-        with open(path, 'r', encoding="utf-8") as f:
-            self.templates = json.loads(f.read())
 
         scale_raw = self.templates["A1"][key[index]] / self.data["occupiedFrame"][index] / self.data['CellSize']
         #перевод стандартных масштабов во float-список
@@ -244,6 +257,7 @@ class drawDWG:
         # отрисовка фигур в натуральную величину
 
     def _figuresDraw(self):
+        self._activate_layer("blocks")
         figures = self.data["Figures"]
         points = list()
 
@@ -295,12 +309,11 @@ class drawDWG:
         for i in [1, 2]:
             self.code += str(np.sign(coords[i].x - coords[i-1].x))
             self.code += str(np.sign(coords[i].y - coords[i-1].y))
-        print(self.code, "(x=", coords[0].x, "y=", coords[0].y, ")", "(x=", coords[1].x, "y=", coords[1].y, ")", "(x=", coords[2].x, "y=", coords[2].y, ")")
         return self.code
 
     def _conveyorsDraw(self):
+        self._activate_layer("conveyor")
         self.coded_conveyors = list()
-
         # в этом цикле для каждой клетки конвейера получаем код
         for conv in self.data["Conveyors"]:
             conveyor = self._getFinConv(conv)
@@ -324,8 +337,6 @@ class drawDWG:
                         self.acad.model.AddArc(elem[1], elem[2], elem[3], elem[4])
             except KeyError:
                 continue
-            print("**")
-
 
 
     #returns coordinate of base point, width and height of each figure on the list

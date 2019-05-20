@@ -21,6 +21,19 @@
     ]
   },
 
+  "Layers":
+  {
+    "conveyor" :
+    {
+      "color" : 3
+    },
+
+    "blocks":
+    {
+      "color" : 7
+    }
+  },
+
   "AHPP":
   {
     "minEntr":
