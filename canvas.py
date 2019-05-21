@@ -35,11 +35,11 @@ class Draw():
         c.pack()
 
         #рисую сетку
-        for x in range(width_canvas + 1):
+        for x in range(int(width_canvas) + 1):
             c.create_line(x*koef, 0, x*koef, height_canvas*koef)
             c.create_text((x + 0.5) *koef, 0.5*koef, text=x, font="Verdana 10")
 
-        for y in range(height_canvas + 1):
+        for y in range(int(height_canvas) + 1):
             c.create_line(0, y*koef, width_canvas*koef, y*koef)
             c.create_text(0.5 * koef, (y + 0.5) * koef, text=y, font="Verdana 10")
 

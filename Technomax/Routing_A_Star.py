@@ -9,6 +9,11 @@ class Coordinate:
     def __str__(self):
         return '(x:{}, y:{})'.format(self.x, self.y)
 
+    def __add__(self, other):
+        self.x += other.x
+        self.y += other.y
+        return Coordinate(self.x, self.y)
+
     def get_length(self, other):  # Манхетоновское расстояние
         return abs(self.x - other.x) + abs(self.y - other.y)
 
@@ -125,3 +130,9 @@ class Routing:
                 open_set.append(child)
                 # print(open_set)
         return []
+
+
+x = Coordinate(1,2)
+y = Coordinate(4,5)
+x += y
+print(x)

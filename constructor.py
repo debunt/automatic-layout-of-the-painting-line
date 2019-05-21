@@ -43,9 +43,7 @@ class Constructor:
             self.createProject2 : {"next": [self.algorithm, self.createProject2], "back": [self.createProject1, self.createProject1]},
             self.algorithm : {"next" : [self.generateSolution, self.algorithm]},
             self.generateSolution : {"autocad": [self.drawdwg, self.generateSolution], "nx": [0,[]], "back" : [self.createProject2, self.createProject2], "update" : [self.algorithm, self.createProject2]},
-            self.drawdwg : {"done" : [self.generateSolution, self.algorithm]}
-
-        }
+            self.drawdwg : {"done" : [self.generateSolution, self.algorithm]}}
 
 
     def transferWindow(self, command):

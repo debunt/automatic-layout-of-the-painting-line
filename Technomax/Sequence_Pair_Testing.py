@@ -420,7 +420,7 @@ class Algorithm():
         pass
 
     def execute(self, data):
-        self.data = data
+        self.data = copy.deepcopy(data)
         eq = Equipment(data)
         ar = eq.get_area()
         area = Area(ar[0], ar[1])

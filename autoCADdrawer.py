@@ -5,8 +5,9 @@ import array
 import math
 import numpy as np
 import copy
-
-
+from copy import deepcopy
+import tempfile
+import os
 
 
 class Shape:
@@ -27,6 +28,7 @@ def change_coord_system(func):
         return changed_elems
     return wrapped
 
+
 class Cells:
 
     #scale- это уже окончательный масштаб с учетом масштаба чертежа
@@ -36,6 +38,7 @@ class Cells:
         self.radius = radius
         self.cells = dict()
         self._prepareDict()
+
 
     #применение декоратора, который изменяет систему координат. finally (x = y, y = -x)
     @change_coord_system
@@ -171,6 +174,7 @@ class drawDWG:
     def _defineLayers(self):
         layers = dict()
         for key in self.templates["Layers"].keys():
+            print(key)
             newLayer = self.acad.doc.Layers.Add(key)  # добавить новый слой
             newLayer.Color = self.templates["Layers"][key]["color"]  # смена цвета выбранного слоя. Все цвета описаны здесь: http://help.autodesk.com/view/ACD/2016/ENU/?guid=GUID-D08F9A8E-5551-4473-A270-D95F7F32F51A
             layers.update({key : newLayer})
@@ -181,12 +185,15 @@ class drawDWG:
         self.acad.doc.ActiveLayer = self.layers[name_layer]# выбор текущего слоя
 
     def execute(self, data):
+        #self.data = copy.deepcopy(data)
         self.data = data
         self.scale = self._getScale()#scale содержит гостовский масштаб
         self.scaledCellSize = self.scale * self.data["CellSize"]
 
         self.cells = Cells(self.scaledCellSize, self.data["Radius"] * self.scale) # содержит блоки-конструктор для отрисовки конвейера
         self.acad = Autocad(create_if_not_exists=True)  # so far app is not openw
+        self.acad.app.Documents.Open(os.getcwd() + "/Files/AutoCAD_templates/А1.dwg")
+        self.acad.ActiveDocument.SaveAs(tempfile.gettempdir() + "/name.dwg") #TODO вписать имя из словаря data
         self.layers = self._defineLayers()
         self.pathQmax = "D:\YandexDisk\#SKOLTECH\Early Research Tecnomax\pythonScript\Files\AutoCAD_cabines\Q-MAX.dwg"
         # TODO create windows attention about that in that time autocad will be opening
@@ -207,7 +214,7 @@ class drawDWG:
         self._scaleFigures()
         self._figuresDraw()
 
-        x = input() #ошибка возникает дальше при вызове канваса
+        #x = input() #ошибка возникает дальше при вызове канваса
         return "done"
 
    
@@ -256,9 +263,20 @@ class drawDWG:
 
         # отрисовка фигур в натуральную величину
 
+    def _getFigures(self):
+        offset = self.templates["CoordSys"]
+        figures = copy.deepcopy(self.data["Figures"])
+        for f in figures:
+            f.start_point += Coordinate(offset[0], offset[1])
+            f.finish_point += Coordinate(offset[0], offset[1])
+        return figures
+
+
+
     def _figuresDraw(self):
         self._activate_layer("blocks")
-        figures = self.data["Figures"]
+
+        figures = self._getFigures()
         points = list()
 
         for f in figures:
@@ -292,11 +310,16 @@ class drawDWG:
     def _getFinConv(self, conveyor):
         if len(conveyor[0]) == 0: return []
         finConveyor = copy.deepcopy(conveyor[0])
+        offset = Coordinate(self.templates["CoordSys"][0], self.templates["CoordSys"][1])
         for i in [1,2]:
             for f in self.data["Figures"]:
                 if conveyor[i] == f.name:
                     figure = f
+
                     point = conveyor[0][0 if i == 1 else -1]
+                    print(point.x, point.y, point)
+                    point += offset
+                    print(point.x, point.y, point)
                     break
             if i == 1:
                 finConveyor.insert(0, self._getImaginaryCell(figure, point))
@@ -396,8 +419,10 @@ class drawDWG:
 
 
 
-
+"""
 if "__main__" == __name__:
     data = 12
     drawer = drawDWG()
     drawer.execute(data)
+
+"""

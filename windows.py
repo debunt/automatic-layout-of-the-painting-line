@@ -542,7 +542,7 @@ class GenerateSolution(Windows):
 
     def execute(self, data):
         super().clearFrame()
-        self.data = data #
+        self.data = copy.deepcopy(data) #
         f_top = LabelFrame()
         f_top.pack()
         l = Label(self.root, text="GenerateSolution", font="Arial 12")
