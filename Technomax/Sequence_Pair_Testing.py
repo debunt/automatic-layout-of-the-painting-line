@@ -167,7 +167,7 @@ class TransformSeqPair:
                 if now_figure.name == tmp:
                     coordinate_to = now_figure.out_point
             a, conveyor = area.conveyor_adding(figure.in_point, coordinate_to)
-            conveyors.append([conveyor, figure.name, figure.neighbor_name]) #добавляю имена фигур, откуда и куда конвейер идет
+            conveyors.append([conveyor, figure, now_figure]) #конвейер, и две фигуры, которые связываются
             buf = area.conveyor_adding(figure.in_point, coordinate_to, only_path_len=True)
             if buf != 0:
                 sum_length += buf

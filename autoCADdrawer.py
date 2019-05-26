@@ -9,7 +9,7 @@ from copy import deepcopy
 import tempfile
 import os
 
-
+from conveyor import Conveyor
 class Shape:
 
     def __init__(self, path):
@@ -27,6 +27,9 @@ def change_coord_system(func):
                 changed_elems.append(["arc", APoint(pR[1], -pR[0]), elem[2], elem[3], elem[4]])
         return changed_elems
     return wrapped
+
+
+
 
 
 class Cells:
@@ -334,12 +337,18 @@ class drawDWG:
             self.code += str(np.sign(coords[i].y - coords[i-1].y))
         return self.code
 
+
+
     def _conveyorsDraw(self):
         self._activate_layer("conveyor")
         self.coded_conveyors = list()
+
+        self.conveyors = list()
         # в этом цикле для каждой клетки конвейера получаем код
         for conv in self.data["Conveyors"]:
+            self.conveyors.append(Conveyor(conveyor))
             conveyor = self._getFinConv(conv)
+
 
             #разбиваем конвейер на клеточки
             for i in range(2, len(conveyor)):
